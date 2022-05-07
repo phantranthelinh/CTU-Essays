@@ -4,14 +4,15 @@ const connectDatabase = require("./config/Database")
 
 const productRouter = require("./routes/productRoute")
 const orderRouter = require("./routes/orderRoute")
-const cors = require("cors")
-const {notFound, errorHandler} = require("/middleware/error")
+const {notFound, errorHandler} = require("./middleware/error")
 const userRouter = require("./routes/userRoute")
-app.use(cors())
+var cors = require("cors")
+
 dotenv.config()
 connectDatabase()
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 const bodyParser = require("body-parser")
 
