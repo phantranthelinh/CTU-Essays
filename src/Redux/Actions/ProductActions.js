@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL } from "../Url";
 import {
   PRODUCT_CREATE_FAIL,
   PRODUCT_CREATE_REQUEST,
@@ -30,7 +31,7 @@ export const listProduct = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/products/all`, config);
+    const { data } = await axios.get(`${URL}/api/products/all`, config);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -59,7 +60,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.delete(`/api/products/${id}`, config);
+    const { data } = await axios.delete(`${URL}/api/products/${id}`, config);
     dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =

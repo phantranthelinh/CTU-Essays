@@ -15,7 +15,7 @@ const UserComponent = () => {
 
   useEffect(()=> {
     dispatch(listUser())
-  },[])
+  },[dispatch])
 
   return (
     <section className="content-main">

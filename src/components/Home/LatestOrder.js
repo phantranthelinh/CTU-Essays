@@ -34,8 +34,8 @@ const LatestOrder = (props) => {
                         <td>{moment(order.createdAt).format("llll")}</td>
                         <td>
                           <span
-                            className={`badge rounded-pill alert-${
-                              order.isDelivered ? "sucesss" : "danger"
+                            className={`badge rounded-pill btn-${
+                              order.isDelivered ? "success" : "danger"
                             }`}
                           >
                             {order.isDelivered ? "Delivered" : "Not delivered"}
