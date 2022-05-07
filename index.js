@@ -4,9 +4,9 @@ const connectDatabase = require("./config/Database")
 
 const productRouter = require("./routes/productRoute")
 const orderRouter = require("./routes/orderRoute")
-const {notFound, errorHandler} = require("./middleware/error").default
-const userRouter = require("./routes/userRoute")
 const cors = require("cors")
+const {notFound, errorHandler} = require("/middleware/error")
+const userRouter = require("./routes/userRoute")
 app.use(cors())
 dotenv.config()
 connectDatabase()
