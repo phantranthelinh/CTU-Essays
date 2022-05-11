@@ -92,7 +92,7 @@ export const createProduct =
         },
       };
       const { data } = await axios.post(
-        `/api/products/`,
+        `${URL}/api/products/`,
         { name, price, description, image, countInStock },
         config
       );
@@ -153,7 +153,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.put(
-      `/api/products/${product._id}`,
+      `${URL}/api/products/${product._id}`,
       product,
       config
     );
