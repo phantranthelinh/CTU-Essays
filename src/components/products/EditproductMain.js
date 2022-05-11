@@ -41,7 +41,7 @@ const EditProductMain = (props) => {
       toast.success("Product updated", ToastObjects);
     }
 
-    if (!product.name || product._id !== productId) {
+    if (!product?.name || product._id !== productId) {
       dispatch(editProduct(productId));
     } else {
       setName(product.name);

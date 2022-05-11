@@ -123,7 +123,7 @@ export const editProduct = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/products/${id}`, config);
+    const { data } = await axios.get(`${URL}/api/products/${id}`, config);
     dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
