@@ -222,11 +222,14 @@ const OrderScreen = (props) => {
                     </tr>
                   </tbody>
                 </table>
-
-                <div className="col-12">
-                  {loadingPay && <Loading />}
-                  <button onClick={orderPayHandler}>Thanh Toán</button>
-                </div>
+                <div className="col-12" >
+                    {loadingPay && <Loading />}
+                    {order?.isPaid ? (
+                    <></>
+                    ) :(
+                    <button onClick={orderPayHandler}>Hoàn tất đặt hàng</button>
+                    )}
+                  </div>
               </div>
             </div>
           </>
