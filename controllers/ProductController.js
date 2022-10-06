@@ -9,7 +9,7 @@ const ProductController = {
       res.json(product);
     } catch (err) {
       res.status(404);
-      throw new Error("Product not found");
+      throw new Error("Không tìm thấy sản phẩm");
     }
   }),
   getAllProducts: asyncHandler(async (req, res) => {
@@ -64,7 +64,7 @@ const ProductController = {
       await product.save();
       res.status(200).json({ Message: "Reviewed added" });
     } else {
-      res.status(500).json("Product not found");
+      res.status(500).json("Không tìm thấy sản phẩm");
     }
   }),
   getAllProductsByAdmin: asyncHandler(async (req, res) => {
@@ -75,10 +75,10 @@ const ProductController = {
     const product = await Product.findById(req.params.id);
     if (product) {
       await product.remove();
-      res.json({ message: "Product deleted" });
+      res.json({ message: "Xoá sản phẩm thành công" });
     } else {
       res.status(404);
-      throw new Error("Product not found");
+      throw new Error("Không tìm thấy sản phẩm");
     }
   }),
   addProduct: asyncHandler(async (req, res) => {
@@ -87,7 +87,7 @@ const ProductController = {
 
     if (productExits) {
       res.status(404);
-      throw new Error("Product name already exist");
+      throw new Error("Sản phẩm đã tồn tại");
     } else {
       const product = new Product({
         name,
@@ -102,7 +102,7 @@ const ProductController = {
         res.status(200).json(createdProduct);
       } else {
         res.status(400);
-        throw new Error("Invalid product data");
+        throw new Error("Dữ liệu sản phẩm chưa đúng");
       }
     }
   }),
@@ -111,19 +111,17 @@ const ProductController = {
     const product = await Product.findById(req.params.id);
 
     if (product) {
+      product.name = name || product.name;
+      product.price = price || product.price;
+      product.description = description || product.description;
+      product.image = image || product.description;
+      product.countInStock = countInStock || product.countInStock;
 
-     product.name= name || product.name;
-     product.price=  price || product.price;
-     product.description= description || product.description;
-     product.image= image || product.description;
-     product.countInStock= countInStock ||product.countInStock ;
-
-     const updatedProduct = await product.save();
-     res.status(200).json(updatedProduct);
-
+      const updatedProduct = await product.save();
+      res.status(200).json(updatedProduct);
     } else {
       res.status(400);
-      throw new Error("Product not found");
+      throw new Error("Không tìm thấy sản phẩm");
     }
   }),
 };

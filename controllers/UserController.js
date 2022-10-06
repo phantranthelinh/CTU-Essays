@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const User = require("../models/UserModel");
 const asyncHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
@@ -16,8 +15,8 @@ const UserController = {
         createAt: user.createdAt,
       });
     } else {
-      res.status(401);
-      throw new Error("Invalid Email or Password");
+      res.status(200);
+      throw new Error("Sai tài khoản hoặc mật khẩu");
     }
   }),
   register: asyncHandler(async (req, res) => {
@@ -25,7 +24,7 @@ const UserController = {
     const userExist = await User.findOne({ email });
     if (userExist) {
       res.status(400);
-      throw new Error("User already exist");
+      throw new Error("Tài khoản đã tồn tại");
     }
     const user = await User.create({
       name: name,
@@ -43,7 +42,7 @@ const UserController = {
       });
     } else {
       res.status(400);
-      throw new Error("Invalid User Data");
+      throw new Error("Dữ liệu chưa đúng định dạng");
     }
   }),
   profile: asyncHandler(async (req, res) => {
@@ -58,7 +57,7 @@ const UserController = {
       });
     } else {
       res.status(404);
-      throw new Error("User not found");
+      throw new Error("Không tìm thấy người dùng");
     }
   }),
 
@@ -82,7 +81,7 @@ const UserController = {
       });
     } else {
       res.status(404);
-      throw new Error("User not found");
+      throw new Error("Không tìm thấy người dùng");
     }
   }),
   getAllUsers: asyncHandler(async (req, res) => {

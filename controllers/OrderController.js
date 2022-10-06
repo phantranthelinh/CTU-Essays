@@ -46,23 +46,7 @@ const OrderController = {
       res.status(200).json(order);
     } else {
       res.status(404);
-      throw new Error("Order not found");
-    }
-  }),
-
-  // ORDER IS PAID
-  isPaid: asyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
-    if (order) {
-      order.isPaid = true;
-      order.paidAt = Date.now();
- 
-
-      const updateOrder = await order.save();
-      res.json(updateOrder);
-    } else {
-      res.status(404);
-      throw new Error("Order not found");
+      throw new Error("Không tìm thấy đơn đặt hàng");
     }
   }),
 
@@ -80,7 +64,7 @@ const OrderController = {
 
   deleteAllOrder: asyncHandler(async (req, res) => {
     await Order.deleteMany({});
-    res.status(200).json("Deleted successfully!");
+    res.status(200).json("Xoá tất cả đơn đặt hàng thành công");
   }),
   isDelivered: asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
@@ -92,9 +76,9 @@ const OrderController = {
       res.json(updateOrder);
     } else {
       res.status(404);
-      throw new Error("Order not found");
+      throw new Error("Không tìm thấy đơn đặt hàng");
     }
-  })
+  }),
 };
 
 module.exports = OrderController;
