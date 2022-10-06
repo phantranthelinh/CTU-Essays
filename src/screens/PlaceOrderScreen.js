@@ -151,7 +151,7 @@ const PlaceOrderScreen = ({ history }) => {
                   <td>
                     <strong>Chi phí vận chuyển</strong>
                   </td>
-                  {cart.shippingPrice == 0 ? (
+                  {cart.shippingPrice === 0 ? (
                     <td>
                      Free
                     </td>
