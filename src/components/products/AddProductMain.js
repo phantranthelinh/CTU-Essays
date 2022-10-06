@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { PRODUCT_CREATE_RESET } from "./../../Redux/Constants/ProductConstants";
 import { createProduct } from "./../../Redux/Actions/ProductActions";
-import Message from './../LoadingError/Error';
-import Loading from './../LoadingError/Loading';
-import Toast from './../LoadingError/Toast';
+import Message from "./../LoadingError/Error";
+import Loading from "./../LoadingError/Loading";
+import Toast from "./../LoadingError/Toast";
 const ToastObjects = {
   pauseOnFocusLoss: false,
   draggable: false,
@@ -27,7 +27,7 @@ const AddProductMain = () => {
 
   useEffect(() => {
     if (product) {
-      toast.success("Product added",ToastObjects);
+      toast.success("Product added", ToastObjects);
       dispatch({ type: PRODUCT_CREATE_RESET });
       setName("");
       setDescription("");
@@ -35,47 +35,42 @@ const AddProductMain = () => {
       setPrice(0);
       setCountInStock(0);
     }
-  }, [dispatch,  product]);
-
-
+  }, [dispatch, product]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct( name, price, description, image, countInStock));
+    dispatch(createProduct(name, price, description, image, countInStock));
   };
   return (
     <>
-    <Toast/>
+      <Toast />
       <section className="content-main" style={{ maxWidth: "1200px" }}>
         <form onSubmit={submitHandler}>
           <div className="content-header">
             <Link to="/products" className="btn btn-danger text-white">
-              Go to products
+              Trở về
             </Link>
-            <h2 className="content-title">Add product</h2>
+            <h2 className="content-title">Thêm mới sản phẩm</h2>
             <div>
-              <button
-                className="btn btn-primary"
-                type="submit"
-              >
-                Publish now
+              <button className="btn btn-primary" type="submit">
+                Thêm
               </button>
             </div>
           </div>
 
           <div className="row mb-4">
-            <div className="col-xl-8 col-lg-8">
+            <div className="col-xl-12 col-lg-12">
               <div className="card mb-4 shadow-sm">
                 <div className="card-body">
-                {error && (<Message variant="alert-danger">{error}</Message>)}
-                  {loading && (<Loading/>)}
+                  {error && <Message variant="alert-danger">{error}</Message>}
+                  {loading && <Loading />}
                   <div className="mb-4">
                     <label htmlFor="product_title" className="form-label">
-                      Product title
+                      Tên sản phẩm
                     </label>
                     <input
                       type="text"
-                      placeholder="Type here"
+                      placeholder="Nhập vào đây..."
                       className="form-control"
                       id="product_title"
                       required
@@ -85,38 +80,36 @@ const AddProductMain = () => {
                   </div>
                   <div className="mb-4">
                     <label htmlFor="product_price" className="form-label">
-                      Price
+                      Đơn giá
                     </label>
                     <input
                       type="number"
-                      placeholder="Type here"
+                      placeholder="Nhập vào đây..."
                       className="form-control"
                       id="product_price"
                       required
                       value={price}
-
                       onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
                     <label htmlFor="product_price" className="form-label">
-                      Count In Stock
+                      Số lượng
                     </label>
                     <input
                       type="number"
-                      placeholder="Type here"
+                      placeholder="Nhập vào đây..."
                       className="form-control"
                       id="product_price"
                       required
                       value={countInStock}
-
                       onChange={(e) => setCountInStock(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
-                    <label className="form-label">Description</label>
+                    <label className="form-label">Mô tả</label>
                     <textarea
-                      placeholder="Type here"
+                      placeholder="Nhập vào đây..."
                       className="form-control"
                       rows="7"
                       value={description}
@@ -125,11 +118,11 @@ const AddProductMain = () => {
                     ></textarea>
                   </div>
                   <div className="mb-4">
-                    <label className="form-label">Images</label>
+                    <label className="form-label">Hình ảnh</label>
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Inter Image URL"
+                      placeholder="Nhập vào đây..."
                       value={image}
                       onChange={(e) => setImage(e.target.value)}
                     />

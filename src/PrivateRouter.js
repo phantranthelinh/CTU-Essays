@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 export default function PrivateRouter({ component: Component, ...rest }) {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
   return (
-    <Route  
+    <Route
       {...rest}
       component={(props) => {
         if (userInfo?.isAdmin) {

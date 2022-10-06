@@ -35,10 +35,9 @@ const Header = () => {
         <form className="searchform">
           <div className="input-group">
             <input
-              list="search_terms"
               type="text"
               className="form-control"
-              placeholder="Search term"
+              placeholder="Tìm kiếm"
             />
             <button className="btn btn-light bg" type="button">
               <i className="far fa-search"></i>
@@ -61,18 +60,8 @@ const Header = () => {
         </button>
         <ul className="nav">
           <li className="nav-item">
-            <Link className={`nav-link btn-icon `} title="Dark mode" to="#">
-              <i className="fas fa-moon"></i>
-            </Link>
-          </li>
-          <li className="nav-item">
             <Link className="nav-link btn-icon" to="#">
               <i className="fas fa-bell"></i>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#">
-              English
             </Link>
           </li>
           <li className="dropdown nav-item">
@@ -85,17 +74,17 @@ const Header = () => {
             </Link>
             <div className="dropdown-menu dropdown-menu-end">
               <Link className="dropdown-item" to="/">
-                My profile
+                Tài khoản
               </Link>
               <Link className="dropdown-item" to="#">
-                Settings
+                Cài đặt
               </Link>
               <Link
                 onClick={logoutHandler}
                 className="dropdown-item text-danger"
                 to="#"
               >
-                Exit
+                Đăng xuất
               </Link>
             </div>
           </li>

@@ -9,12 +9,10 @@ const OrderMain = (props) => {
 
   const { loading, error, orders } = orderList;
 
-
-
   return (
     <section className="content-main">
       <div className="content-header">
-        <h2 className="content-title">Orders</h2>
+        <h2 className="content-title text-uppercase">Danh sách đơn đặt hàng</h2>
       </div>
 
       <div className="card mb-4 shadow-sm">
@@ -27,14 +25,7 @@ const OrderMain = (props) => {
                 className="form-control p-2"
               />
             </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>Status</option>
-                <option>Active</option>
-                <option>Disabled</option>
-                <option>Show all</option>
-              </select>
-            </div>
+
             <div className="col-lg-2 col-6 col-md-3">
               <select className="form-select">
                 <option>Show 20</option>

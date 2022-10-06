@@ -33,7 +33,7 @@ const OrderDetailmain = (props) => {
     <section className="content-main">
       <div className="content-header">
         <Link to="/orders" className="btn btn-dark text-white">
-          Back To Orders
+          Trở về
         </Link>
       </div>
       {loading ? (
@@ -54,7 +54,7 @@ const OrderDetailmain = (props) => {
                   </span>
                   <br />
                   <small className="text-white mx-3 ">
-                    Order ID: {order?._id}
+                    Mã đơn hàng: {order?._id}
                   </small>
                 </div>
                 <div className="col-lg-6 col-md-6 ms-auto d-flex justify-content-end align-items-center">
@@ -63,10 +63,8 @@ const OrderDetailmain = (props) => {
                     style={{ maxWidth: "200px" }}
                   >
                     <option>Change status</option>
-                    <option>Awaiting payment</option>
-                    <option>Confirmed</option>
-                    <option>Shipped</option>
-                    <option>Delivered</option>
+                    <option>Đang vận chuyển</option>
+                    <option>Đã nhận hàng</option>
                   </select>
                   <Link className="btn btn-success ms-2" to="#">
                     <i className="fas fa-print"></i>
@@ -97,7 +95,7 @@ const OrderDetailmain = (props) => {
                   <div className="box shadow-sm bg-light">
                     {order.isDelivered ? (
                       <button className="btn btn-success col-12">
-                        DELIVERED AT ({" "}
+                        Vận chuyển vào ({" "}
                         {moment(order.deliveredAt).format("DD/MM/YYYY")})
                       </button>
                     ) : (
@@ -107,7 +105,7 @@ const OrderDetailmain = (props) => {
                           onClick={deliveredHandler}
                           className="btn btn-dark col-12"
                         >
-                          MARK AS DELIVERED
+                          Đã vận chuyển
                         </button>
                       </>
                     )}

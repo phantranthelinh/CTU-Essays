@@ -1,12 +1,9 @@
-
-import Sidebar from "./../components/sidebar";
+import Sidebar from "./../components/Sidebar";
 import Header from "./../components/Header";
 import EditProductMain from "./../components/products/EditproductMain";
 
 const ProductEditScreen = ({ match }) => {
-
-  const productId = match.params.id
-
+  const productId = match.params.id;
 
   return (
     <>

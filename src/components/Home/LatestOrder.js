@@ -19,39 +19,37 @@ const LatestOrder = (props) => {
               <tbody>
                 {orders.slice(0, 5).map((order) => {
                   return (
-                    <>
-                      <tr key={order._id}>
-                        <td>
-                          <b>{order.user.name}</b>
-                        </td>
-                        <td>{order.user.email}</td>
-                        <td>
-                          {Intl.NumberFormat("VN", {
-                            maximumSignificantDigits: 3,
-                          }).format(order.totalPrice)}{" "}
-                          VNĐ
-                        </td>
-                        <td>{moment(order.createdAt).format("llll")}</td>
-                        <td>
-                          <span
-                            className={`badge rounded-pill btn-${
-                              order.isDelivered ? "success" : "danger"
-                            }`}
-                          >
-                            {order.isDelivered ? "Delivered" : "Not delivered"}
-                          </span>
-                        </td>
+                    <tr key={order._id}>
+                      <td>
+                        <b>{order.user.name}</b>
+                      </td>
+                      <td>{order.user.email}</td>
+                      <td>
+                        {Intl.NumberFormat("VN", {
+                          maximumSignificantDigits: 3,
+                        }).format(order.totalPrice)}{" "}
+                        VNĐ
+                      </td>
+                      <td>{moment(order.createdAt).format("llll")}</td>
+                      <td>
+                        <span
+                          className={`badge rounded-pill btn-${
+                            order.isDelivered ? "success" : "danger"
+                          }`}
+                        >
+                          {order.isDelivered ? "Delivered" : "Not delivered"}
+                        </span>
+                      </td>
 
-                        <td className="d-flex justify-content-end align-item-center">
-                          <Link
-                            to={`/order/${order._id}`}
-                            className="text-success"
-                          >
-                            <i className="fas fa-eye"></i>
-                          </Link>
-                        </td>
-                      </tr>
-                    </>
+                      <td className="d-flex justify-content-end align-item-center">
+                        <Link
+                          to={`/order/${order._id}`}
+                          className="text-success"
+                        >
+                          <i className="fas fa-eye"></i>
+                        </Link>
+                      </td>
+                    </tr>
                   );
                 })}
               </tbody>

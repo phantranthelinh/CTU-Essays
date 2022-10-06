@@ -9,7 +9,7 @@ const Sidebar = () => {
           <Link to="/" className="brand-wrap">
             <img
               src="/images/logo.png"
-              style={{ height: "46" }}
+              style={{ height: "60" }}
               className="logo"
               alt="Ecommerce dashboard template"
             />
@@ -31,7 +31,7 @@ const Sidebar = () => {
                 exact={true}
               >
                 <i className="icon fas fa-home"></i>
-                <span className="text">Dashboard</span>
+                <span className="text">Trang chủ</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -41,7 +41,7 @@ const Sidebar = () => {
                 to="/products"
               >
                 <i className="icon fas fa-shopping-bag"></i>
-                <span className="text">Products</span>
+                <span className="text">Sản phẩm</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -51,7 +51,7 @@ const Sidebar = () => {
                 to="/add-product"
               >
                 <i className="icon fas fa-cart-plus"></i>
-                <span className="text">Add product</span>
+                <span className="text">Thêm sản phẩm</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -61,7 +61,7 @@ const Sidebar = () => {
                 to="/orders"
               >
                 <i className="icon fas fa-bags-shopping"></i>
-                <span className="text">Orders</span>
+                <span className="text">Đơn đặt hàng</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -71,7 +71,7 @@ const Sidebar = () => {
                 to="/users"
               >
                 <i className="icon fas fa-user"></i>
-                <span className="text">Users</span>
+                <span className="text">Khách hàng</span>
               </NavLink>
             </li>
           </ul>

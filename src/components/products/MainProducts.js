@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import Product from "./Product";
 import { useDispatch, useSelector } from "react-redux";
 import { listProduct } from "./../../Redux/Actions/ProductActions";
-import Message from './../LoadingError/Error';
+import Message from "./../LoadingError/Error";
+
 
 const MainProducts = () => {
   const dispatch = useDispatch();
@@ -12,21 +13,20 @@ const MainProducts = () => {
   const { loading, error, products } = productList;
 
   const productDelete = useSelector((state) => state.productDelete);
-  const { success: successDeleteProduct, error: errorDeleteProduct  } = productDelete;
+  const { success: successDeleteProduct, error: errorDeleteProduct } =
+    productDelete;
 
   useEffect(() => {
-
     dispatch(listProduct());
-  
-  }, [dispatch,successDeleteProduct]);
+  }, [dispatch, successDeleteProduct]);
 
   return (
     <section className="content-main">
       <div className="content-header">
-        <h2 className="content-title">Sản phẩm</h2>
+        <h2 className="content-title text-uppercase">DANH SÁCH SẢN PHẨM</h2>
         <div>
           <Link to="/add-product" className="btn btn-primary">
-            Tạo mới
+            Thêm mới
           </Link>
         </div>
       </div>
@@ -37,30 +37,17 @@ const MainProducts = () => {
             <div className="col-lg-4 col-md-6 me-auto ">
               <input
                 type="search"
-                placeholder="Search..."
+                placeholder="Tìm kiếm..."
                 className="form-control p-2"
               />
-            </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>Thể loại</option>
-                <option>Electronics</option>
-                <option>Clothings</option>
-                <option>Something else</option>
-              </select>
-            </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>Latest added</option>
-                <option>Cheap first</option>
-                <option>Most viewed</option>
-              </select>
             </div>
           </div>
         </header>
 
         <div className="card-body">
-        {errorDeleteProduct && (<Message variant="alert-danger">{errorDeleteProduct}</Message>)}
+          {errorDeleteProduct && (
+            <Message variant="alert-danger">{errorDeleteProduct}</Message>
+          )}
           {loading ? (
             <loading />
           ) : error ? (
@@ -72,7 +59,6 @@ const MainProducts = () => {
               ))}
             </div>
           )}
-         
 
           <nav className="float-end mt-4" aria-label="Page navigation">
             <ul className="pagination">

@@ -4,7 +4,7 @@ import "./responsive.css";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/productScreen";
+import ProductScreen from "./screens/ProductScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderDetailScreen from "./screens/OrderDetailScreen";
 import AddProduct from "./screens/AddProduct";
@@ -13,28 +13,22 @@ import UsersScreen from "./screens/UsersScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
-import { useDispatch, useSelector } from 'react-redux';
-import { listProduct } from './Redux/Actions/ProductActions';
-import { listOrder } from './Redux/Actions/OrderActions';
+import { useDispatch, useSelector } from "react-redux";
+import { listProduct } from "./Redux/Actions/ProductActions";
+import { listOrder } from "./Redux/Actions/OrderActions";
 
 function App() {
-
   const dispatch = useDispatch();
-  const userLogin = useSelector(state=> state.userLogin);
+  const userLogin = useSelector((state) => state.userLogin);
 
-  const {userInfo} = userLogin;
+  const { userInfo } = userLogin;
 
-
-  useEffect(() => 
-  {
-    if(userInfo && userInfo.isAdmin){
-      dispatch(listProduct())
-      dispatch(listOrder())
-
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listProduct());
+      dispatch(listOrder());
     }
-  }
-  
-  ,[dispatch, userInfo])
+  }, [dispatch, userInfo]);
   return (
     <>
       <Router>

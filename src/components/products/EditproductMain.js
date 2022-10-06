@@ -3,7 +3,7 @@ import Toast from "./../LoadingError/Toast";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { editProduct ,updateProduct } from "../../Redux/Actions/ProductActions";
+import { editProduct, updateProduct } from "../../Redux/Actions/ProductActions";
 import { PRODUCT_UPDATE_RESET } from "../../Redux/Constants/ProductConstants";
 import { toast } from "react-toastify";
 import Message from "./../LoadingError/Error";
@@ -72,18 +72,18 @@ const EditProductMain = (props) => {
         <form onSubmit={submitHandler}>
           <div className="content-header">
             <Link to="/products" className="btn btn-danger text-white">
-              Go to products
+              Trở về
             </Link>
-            <h2 className="content-title">Update Product</h2>
+            <h2 className="content-title">Chỉnh sửa sản phẩm</h2>
             <div>
               <button type="submit" className="btn btn-primary">
-                Publish now
+                Lưu
               </button>
             </div>
           </div>
 
           <div className="row mb-4">
-            <div className="col-xl-8 col-lg-8">
+            <div className="col-xl-12 col-lg-12">
               <div className="card mb-4 shadow-sm">
                 <div className="card-body">
                   {errorUpdate && (
