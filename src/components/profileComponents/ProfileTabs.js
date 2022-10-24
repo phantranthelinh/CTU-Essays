@@ -9,6 +9,8 @@ import Toast from "./../LoadingError/Toast";
 const ProfileTabs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,12 +28,15 @@ const ProfileTabs = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { loading: updateLoading } = userUpdateProfile;
   useEffect(() => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setPhone(user.phone);
+      setAddress(user.address);
     }
   }, [dispatch, user]);
   const submitHandler = (e) => {
@@ -59,7 +64,7 @@ const ProfileTabs = () => {
       <form className="row  form-container" onSubmit={submitHandler}>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-fn">Tên người dùng</label>
+            <label htmlFor="account-fn">Tên người dùng</label>
             <input
               className="form-control"
               type="text"
@@ -72,7 +77,7 @@ const ProfileTabs = () => {
 
         <div className="col-md-6">
           <div className="form">
-            <label for="account-email">Địa chỉ email</label>
+            <label htmlFor="account-email">Địa chỉ email</label>
             <input
               className="form-control"
               type="email"
@@ -83,7 +88,29 @@ const ProfileTabs = () => {
         </div>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-pass">Mật khẩu mới</label>
+            <label htmlFor="account-pass">Số điện thoại</label>
+            <input
+              className="form-control"
+              type="text"
+              defaultValue={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
+            <label htmlFor="account-pass">Địa chỉ</label>
+            <input
+              className="form-control"
+              type="text"
+              defaultValue={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
+            <label htmlFor="account-pass">Mật khẩu mới</label>
             <input
               className="form-control"
               type="password"
@@ -94,7 +121,7 @@ const ProfileTabs = () => {
         </div>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-confirm-pass">Xác nhận lại mật khẩu</label>
+            <label htmlFor="account-confirm-pass">Xác nhận lại mật khẩu</label>
             <input
               className="form-control"
               type="password"

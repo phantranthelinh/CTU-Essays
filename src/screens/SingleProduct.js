@@ -12,6 +12,7 @@ import Toast from "../components/LoadingError/Toast";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
 import moment from "moment";
 import { createProductReview } from "./../Redux/Actions/ProductActions";
+import { motion } from "framer-motion/dist/framer-motion";
 const SingleProduct = ({ history, match }) => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -75,9 +76,18 @@ const SingleProduct = ({ history, match }) => {
             {" "}
             <div className="row">
               <div className="col-md-6">
-                <div className="single-image">
+                <motion.div
+                  className="single-image"
+                  initial={{ scale: 0 }}
+                  animate={{ rotate: 0, scale: 1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                  }}
+                >
                   <img src={product.image} alt={product.name} />
-                </div>
+                </motion.div>
               </div>
               <div className="col-md-6">
                 <div className="product-dtl">
@@ -89,7 +99,12 @@ const SingleProduct = ({ history, match }) => {
                   <div className="product-count col-lg-7 ">
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Giá</h6>
-                      <span style={{color: "red"}} >{ Intl.NumberFormat('VN', { maximumSignificantDigits: 3 }).format(product.price )} VNĐ</span>
+                      <span style={{ color: "red" }}>
+                        {Intl.NumberFormat("VN", {
+                          maximumSignificantDigits: 3,
+                        }).format(product.price)}{" "}
+                        VNĐ
+                      </span>
                     </div>
                     <div className="flex-box d-flex justify-content-between align-items-center">
                       <h6>Trạng thái</h6>
@@ -110,18 +125,13 @@ const SingleProduct = ({ history, match }) => {
                       <>
                         <div className="flex-box d-flex justify-content-between align-items-center">
                           <h6>Số lượng</h6>
-                          <select
+                          <input
+                            type="number"
+                            min="1"
+                            max={product?.countInStock}
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </select>
+                          />
                         </div>
                         <button
                           onClick={HandleAddToCart}
@@ -195,7 +205,7 @@ const SingleProduct = ({ history, match }) => {
                 <div className="my-3">
                   <button
                     disabled={loadingCreateReview}
-                    className="col-12 bg-black border-0 p-3 rounded text-white"
+                    className="col-12 round-black-btn border-0 p-3 rounded text-white"
                   >
                     Đăng
                   </button>

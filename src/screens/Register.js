@@ -12,6 +12,10 @@ const Register = ({ location, history }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+
+  const [phone, setPhone] = useState("");
+
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
@@ -26,7 +30,7 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    dispatch(register(name, email, password,address, phone));
   };
   return (
     <>
@@ -38,20 +42,35 @@ const Register = ({ location, history }) => {
           className="Login col-md-8 col-lg-4 col-11"
           onSubmit={submitHandler}
         >
-          <input
+          <input 
+            
             type="text"
-            placeholder="Username"
+            placeholder="Tên người dùng"
             onChange={(e) => setName(e.target.value)}
           />
           <input
             type="email"
+            className="mt-2"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
+            className="mt-2"
             type="password"
             placeholder="Mật khẩu"
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <input
+            className="mt-2"
+            type="text"
+            placeholder="Địa chỉ"
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          <input
+            className="mt-2"
+            type="text"
+            placeholder="Số điện thoại"
+            onChange={(e) => setPhone(e.target.value)}
           />
 
           <button type="submit">Đăng ký</button>

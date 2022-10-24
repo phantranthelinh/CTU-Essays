@@ -40,6 +40,7 @@ const Login = ({ location, history }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
+          className="mt-2"
             type="password"
             placeholder="Mật khẩu"
             onChange={(e) => setPassword(e.target.value)}
