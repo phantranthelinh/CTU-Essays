@@ -1,7 +1,6 @@
 const express = require("express")
 const dotenv = require("dotenv")
 const connectDatabase = require("./config/Database")
-
 const productRouter = require("./routes/productRoute")
 const orderRouter = require("./routes/orderRoute")
 const {notFound, errorHandler} = require("./middleware/error")
@@ -15,6 +14,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 const bodyParser = require("body-parser")
+const morgan = require("morgan")
+app.use(morgan("dev"))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 // API
