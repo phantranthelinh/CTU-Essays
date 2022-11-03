@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    userType:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "UserTypes"
+    },
     address: [],
     phone:{
       type: Number, 
