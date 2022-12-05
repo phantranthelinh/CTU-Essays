@@ -4,14 +4,16 @@ const { protect ,admin } = require("../middleware/AuthMiddleware");
 const router = express.Router();
 
 const ProductController = require("../controllers/ProductController");
-router.get("/all", protect , admin ,ProductController.getAllProductsByAdmin);
-router.get("/:id", ProductController.getAProduct);
+router.get("/",  ProductController.getAll);
+router.get("/admin", protect , admin ,ProductController.getAllByAdmin);
+router.get("/:id", ProductController.getSingle);
 
-router.delete("/:id",protect,admin, ProductController.deleteProduct);
-router.put("/:id", protect , admin ,ProductController.editProduct);
-router.post("/:id/review", protect, ProductController.addReview);   
-router.post("/", protect , admin ,ProductController.addProduct);
+router.delete("/:id",protect,admin, ProductController.delete);
+router.patch("/:id", protect , admin ,ProductController.edit);
+router.post("/:id/review", protect, ProductController.addReview);
+router.get("/:id/review", protect, ProductController.getAllReview);    
+router.post("/", protect , admin ,ProductController.add);
 
-router.get("/", ProductController.getAllProducts);
+
 
 module.exports = router;

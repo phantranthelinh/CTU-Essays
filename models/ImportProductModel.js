@@ -11,7 +11,7 @@ const importProductSchema = mongoose.Schema({
     },
 },
 {
-    timestamp: true,
+    timestamps: true,
 })
 const ImportProduct = mongoose.model("ImportProduct", importProductSchema)
 module.exports = ImportProduct

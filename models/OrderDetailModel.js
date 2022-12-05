@@ -27,7 +27,7 @@ const orderDetailSchema = mongoose.Schema({
         required: true,
     }
 },{ 
-    timestamp: true,
+    timestamps: true,
 })
 
 const OrderDetail = mongoose.model("OderDetail", orderDetailSchema)

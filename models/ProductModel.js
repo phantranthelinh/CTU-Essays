@@ -9,8 +9,19 @@ const productSchema = mongoose.Schema(
     slug: { type: String, slug: "name" },
     rating: { type: Number, required: true, default: 0 },
     numReviews: { type: Number, required: true, default: 0 },
-    price: { type: Number, required: true, default: 0 },
-    countInStock: { type: Number, required: true, default: 0 },
+    salePrice: { type: Number, required: true, default: 0 },
+    importProductDetail: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ImportProductDetail",
+    },
+    importId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ImportProduct",
+    },
+    image: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ImageProduct",
+    },
   },
   { timestamps: true }
 );
