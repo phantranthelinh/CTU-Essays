@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Toast from "./../LoadingError/Toast";
+import Toast from "../LoadingError/Toast";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { editProduct, updateProduct } from "../../Redux/Actions/ProductActions";
 import { PRODUCT_UPDATE_RESET } from "../../Redux/Constants/ProductConstants";
 import { toast } from "react-toastify";
-import Message from "./../LoadingError/Error";
-import Loading from "./../LoadingError/Loading";
+import Message from "../LoadingError/Error";
+import Loading from "../LoadingError/Loading";
+import { resizeFile } from "../../helper/fileHelper";
+import { useMemo } from "react";
 
 const ToastObjects = {
   pauseOnFocusLoss: false,
@@ -18,10 +20,14 @@ const ToastObjects = {
 const EditProductMain = (props) => {
   const { productId } = props;
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [importPrice, setImportPrice] = useState(0);
+  const [salePrice, setSalePrice] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [image, setImage] = useState("");
   const [countInStock, setCountInStock] = useState("");
   const [description, setDescription] = useState("");
+  const [base64, setBase64] = useState("");
+  const [file, setFile] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -35,6 +41,22 @@ const EditProductMain = (props) => {
     success: successUpdate,
   } = productUpdate;
 
+
+  const dataFormatted = useMemo(() => {
+    return {
+      image: product?.image?.base64,
+      description: product?.description,
+      name: product?.name,
+      numReviews: product?.numReviews,
+      rating: product?.rating,
+      slug: product?.slug,
+      salePrice: product?.salePrice,
+      createdAt: product?.createdAt,
+      countInStock: product?.importProductDetail?.countInStock,
+      importPrice: product?.importProductDetail?.importPrice,
+    };
+  }, [product]);
+
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
@@ -44,23 +66,43 @@ const EditProductMain = (props) => {
     if (!product?.name || product._id !== productId) {
       dispatch(editProduct(productId));
     } else {
-      setName(product.name);
-      setDescription(product.description);
-      setImage(product.image);
-      setPrice(product.price);
-      setCountInStock(product.countInStock);
+      setName(dataFormatted.name);
+      setDescription(dataFormatted.description);
+      setImage(dataFormatted.image.base64);
+      setImportPrice(dataFormatted.importPrice);
+      setSalePrice(dataFormatted.salePrice);
+
+      setCountInStock(dataFormatted.countInStock);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product, dispatch, productId, successUpdate]);
 
+  const onChangeFile = async (e) => {
+    const selected = e.target.files[0];
+    setBase64("");
+
+    if (selected) {
+      const maxWidth = 500;
+      const maxHeight = 500;
+      setFile(selected);
+      const image = await resizeFile(selected, maxWidth, maxHeight);
+      if (image) {
+        setBase64(image);
+      }
+    }
+  };
+
+  
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
       updateProduct({
         _id: productId,
         name,
-        price,
+        salePrice,
+        importPrice,
         description,
-        image,
+        image: base64,
         countInStock,
       })
     );
@@ -100,7 +142,7 @@ const EditProductMain = (props) => {
                       {" "}
                       <div className="mb-4">
                         <label htmlFor="product_title" className="form-label">
-                          Product title
+                          Tên sản phẩm
                         </label>
                         <input
                           type="text"
@@ -114,7 +156,7 @@ const EditProductMain = (props) => {
                       </div>
                       <div className="mb-4">
                         <label htmlFor="product_price" className="form-label">
-                          Price
+                          Giá nhập
                         </label>
                         <input
                           type="number"
@@ -122,13 +164,27 @@ const EditProductMain = (props) => {
                           className="form-control"
                           id="product_price"
                           required
-                          value={price}
-                          onChange={(e) => setPrice(e.target.value)}
+                          value={importPrice}
+                          onChange={(e) => setImportPrice(e.target.value)}
                         />
                       </div>
                       <div className="mb-4">
                         <label htmlFor="product_price" className="form-label">
-                          Count In Stock
+                          Giá giá bán
+                        </label>
+                        <input
+                          type="number"
+                          placeholder="Type here"
+                          className="form-control"
+                          id="product_price"
+                          required
+                          value={salePrice}
+                          onChange={(e) => setSalePrice(e.target.value)}
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <label htmlFor="product_price" className="form-label">
+                          Số lượng trong kho
                         </label>
                         <input
                           type="number"
@@ -141,7 +197,7 @@ const EditProductMain = (props) => {
                         />
                       </div>
                       <div className="mb-4">
-                        <label className="form-label">Description</label>
+                        <label className="form-label">Mô tả</label>
                         <textarea
                           placeholder="Type here"
                           className="form-control"
@@ -152,13 +208,15 @@ const EditProductMain = (props) => {
                         ></textarea>
                       </div>
                       <div className="mb-4">
-                        <label className="form-label">Images</label>
+                        <label className="form-label">Hình ảnh</label>
                         <input
                           className="form-control"
-                          type="text"
-                          value={image}
-                          onChange={(e) => setImage(e.target.value)}
+                          type="file"
+                          onChange={onChangeFile}
                         />
+                        {file === null ? (
+                          <img src={dataFormatted.image} alt="Product_Photo" />
+                        ) : <img src={base64} alt="Product_Photo" />}
                       </div>
                     </>
                   )}

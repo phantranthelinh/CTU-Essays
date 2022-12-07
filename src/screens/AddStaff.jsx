@@ -1,18 +1,18 @@
 import React from "react";
+import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import Main from "../components/Home/Main";
-import Sidebar from "./../components/Sidebar";
+import Add from "../components/staffs/Add";
 
-const HomeScreen = () => {
+const AddStaff = () => {
   return (
     <>
       <Sidebar />
       <main className="main-wrap">
         <Header />
-        <Main />
+        <Add />
       </main>
     </>
   );
 };
 
-export default HomeScreen;
+export default AddStaff;

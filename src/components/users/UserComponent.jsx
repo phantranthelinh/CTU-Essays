@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { listUser } from "../../Redux/Actions/UserActions";
-import Loading from "./../LoadingError/Loading";
-import Message from "./../LoadingError/Error";
+import Loading from "../LoadingError/Loading";
+import Message from "../LoadingError/Error";
 
 const UserComponent = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const UserComponent = () => {
   return (
     <section className="content-main">
       <div className="content-header">
-        <h2 className="content-title text-uppercase">danh sách người dùng</h2>
+        <h2 className="content-title text-uppercase">danh sách khách hàng</h2>
         <div>
           <Link to="#" className="btn btn-primary">
             <i className="material-icons md-plus"></i> Thêm mới

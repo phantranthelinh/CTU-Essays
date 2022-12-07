@@ -34,7 +34,8 @@ const Sidebar = () => {
                 <span className="text">Trang chủ</span>
               </NavLink>
             </li>
-            <li className="menu-item">
+
+            <li className="menu-item"> 
               <NavLink
                 activeClassName="active"
                 className="menu-link"
@@ -42,16 +43,6 @@ const Sidebar = () => {
               >
                 <i className="icon fas fa-shopping-bag"></i>
                 <span className="text">Sản phẩm</span>
-              </NavLink>
-            </li>
-            <li className="menu-item">
-              <NavLink
-                activeClassName="active"
-                className="menu-link"
-                to="/add-product"
-              >
-                <i className="icon fas fa-cart-plus"></i>
-                <span className="text">Thêm sản phẩm</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -68,10 +59,30 @@ const Sidebar = () => {
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/users"
+                to="/customers"
               >
                 <i className="icon fas fa-user"></i>
                 <span className="text">Khách hàng</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/staffs"
+              >
+                <i className="icon fa fa-users"></i>
+                <span className="text">Nhân viên</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/staff-types"
+              >
+                <i className="icon fa fa-user-secret"></i>
+                <span className="text">Chức vụ</span>
               </NavLink>
             </li>
           </ul>

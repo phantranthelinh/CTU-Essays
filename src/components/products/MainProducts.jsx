@@ -2,16 +2,17 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Product from "./Product";
 import { useDispatch, useSelector } from "react-redux";
-import { listProduct } from "./../../Redux/Actions/ProductActions";
-import Message from "./../LoadingError/Error";
+import { listProduct } from "../../Redux/Actions/ProductActions";
+import Message from "../LoadingError/Error";
+import Loading from '../LoadingError/Loading';
 
 
 const MainProducts = () => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
-
+  const { loading, error, products: data } = productList;
+  
   const productDelete = useSelector((state) => state.productDelete);
   const { success: successDeleteProduct, error: errorDeleteProduct } =
     productDelete;
@@ -19,6 +20,7 @@ const MainProducts = () => {
   useEffect(() => {
     dispatch(listProduct());
   }, [dispatch, successDeleteProduct]);
+
 
   return (
     <section className="content-main">
@@ -49,12 +51,12 @@ const MainProducts = () => {
             <Message variant="alert-danger">{errorDeleteProduct}</Message>
           )}
           {loading ? (
-            <loading />
+            <Loading />
           ) : error ? (
             <Message variant="alert-danger">{error}</Message>
           ) : (
             <div className="row">
-              {products?.map((product) => (
+              {data.products?.map((product) => (
                 <Product product={product} key={product._id} />
               ))}
             </div>

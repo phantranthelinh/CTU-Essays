@@ -1,27 +1,27 @@
 import axios from "axios";
 import {
-  PRODUCT_CREATE_FAIL,
-  PRODUCT_CREATE_REQUEST,
-  PRODUCT_CREATE_SUCCESS,
-  PRODUCT_DELETE_FAIL,
-  PRODUCT_DELETE_REQUEST,
-  PRODUCT_DELETE_SUCCESS,
-  PRODUCT_EDIT_FAIL,
-  PRODUCT_EDIT_REQUEST,
-  PRODUCT_EDIT_SUCCESS,
-  PRODUCT_LIST_FAIL,
-  PRODUCT_LIST_REQUEST,
-  PRODUCT_LIST_SUCCESS,
-  PRODUCT_UPDATE_FAIL,
-  PRODUCT_UPDATE_REQUEST,
-  PRODUCT_UPDATE_SUCCESS,
-} from "./../Constants/ProductConstants";
+  STAFF_CREATE_FAIL,
+  STAFF_CREATE_REQUEST,
+  STAFF_CREATE_SUCCESS,
+  STAFF_DELETE_FAIL,
+  STAFF_DELETE_REQUEST,
+  STAFF_DELETE_SUCCESS,
+  STAFF_EDIT_FAIL,
+  STAFF_EDIT_REQUEST,
+  STAFF_EDIT_SUCCESS,
+  STAFF_LIST_FAIL,
+  STAFF_LIST_REQUEST,
+  STAFF_LIST_SUCCESS,
+  STAFF_UPDATE_FAIL,
+  STAFF_UPDATE_REQUEST,
+  STAFF_UPDATE_SUCCESS,
+} from "./../Constants/StaffConstants";
 import { logout } from "./UserActions";
 
-//PRODUCT LIST
-export const listProduct = () => async (dispatch, getState) => {
+//STAFF LIST
+export const listStaff = () => async (dispatch, getState) => {
   try {
-    dispatch({ type: PRODUCT_LIST_REQUEST });
+    dispatch({ type: STAFF_LIST_REQUEST });
     const {
       userLogin: { userInfo },
     } = getState();
@@ -30,8 +30,8 @@ export const listProduct = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/products/`, config);
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+    const { data } = await axios.get(`/api/staffs/`, config);
+    dispatch({ type: STAFF_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -41,16 +41,16 @@ export const listProduct = () => async (dispatch, getState) => {
       dispatch(logout());
     }
     dispatch({
-      type: PRODUCT_LIST_FAIL,
+      type: STAFF_LIST_FAIL,
       payload: message,
     });
   }
 };
 
-//DELETE PRODUCT
-export const deleteProduct = (id) => async (dispatch, getState) => {
+//DELETE STAFF
+export const deleteStaff = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: PRODUCT_DELETE_REQUEST });
+    dispatch({ type: STAFF_DELETE_REQUEST });
     const {
       userLogin: { userInfo },
     } = getState();
@@ -59,8 +59,8 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.delete(`/api/products/${id}`, config);
-    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });
+    const { data } = await axios.delete(`/api/staffs/${id}`, config);
+    dispatch({ type: STAFF_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -70,23 +70,17 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       dispatch(logout());
     }
     dispatch({
-      type: PRODUCT_DELETE_FAIL,
+      type: STAFF_DELETE_FAIL,
       payload: message,
     });
   }
 };
 
-//CREATE PRODUCT
-export const createProduct =
-  ( name,
-    salePrice,
-    importPrice,
-    description,
-    image,
-    quantity) =>
-  async (dispatch, getState) => {
+//CREATE STAFF
+export const createStaff =
+  (name, email, password, staffType) => async (dispatch, getState) => {
     try {
-      dispatch({ type: PRODUCT_CREATE_REQUEST });
+      dispatch({ type: STAFF_CREATE_REQUEST });
       const {
         userLogin: { userInfo },
       } = getState();
@@ -96,11 +90,11 @@ export const createProduct =
         },
       };
       const { data } = await axios.post(
-        `/api/products/`,
-        { name, image, importPrice,description, salePrice, quantity },
+        `/api/staffs/`,
+        { name, email, password, staffType },
         config
       );
-      dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
+      dispatch({ type: STAFF_CREATE_SUCCESS, payload: data });
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -110,15 +104,15 @@ export const createProduct =
         dispatch(logout());
       }
       dispatch({
-        type: PRODUCT_CREATE_FAIL,
+        type: STAFF_CREATE_FAIL,
         payload: message,
       });
     }
   };
 
-export const editProduct = (id) => async (dispatch, getState) => {
+export const editStaff = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: PRODUCT_EDIT_REQUEST });
+    dispatch({ type: STAFF_EDIT_REQUEST });
     const {
       userLogin: { userInfo },
     } = getState();
@@ -127,9 +121,8 @@ export const editProduct = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/products/${id}`, config);
-    dispatch({ type: PRODUCT_EDIT_SUCCESS, payload: data });
-
+    const { data } = await axios.get(`/api/staffs/${id}`, config);
+    dispatch({ type: STAFF_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -139,15 +132,15 @@ export const editProduct = (id) => async (dispatch, getState) => {
       dispatch(logout());
     }
     dispatch({
-      type: PRODUCT_EDIT_FAIL,
+      type: STAFF_EDIT_FAIL,
       payload: message,
     });
   }
 };
 
-export const updateProduct = (product) => async (dispatch, getState) => {
+export const updateStaff = (staff) => async (dispatch, getState) => {
   try {
-    dispatch({ type: PRODUCT_UPDATE_REQUEST });
+    dispatch({ type: STAFF_UPDATE_REQUEST });
     const {
       userLogin: { userInfo },
     } = getState();
@@ -157,12 +150,12 @@ export const updateProduct = (product) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.patch(
-      `/api/products/${product._id}`,
-      product,
+    const { data } = await axios.put(
+      `/api/staffs/${staff.id}`,
+      staff,
       config
     );
-    dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
+    dispatch({ type: STAFF_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -172,7 +165,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
       dispatch(logout());
     }
     dispatch({
-      type: PRODUCT_UPDATE_FAIL,
+      type: STAFF_UPDATE_FAIL,
       payload: message,
     });
   }

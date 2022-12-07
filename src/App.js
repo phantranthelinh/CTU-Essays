@@ -16,6 +16,12 @@ import PrivateRouter from "./PrivateRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { listProduct } from "./Redux/Actions/ProductActions";
 import { listOrder } from "./Redux/Actions/OrderActions";
+import AddStaffType from "./screens/AddStaffType";
+import StaffTypeScreen from "./screens/StaffTypeScreen";
+import StaffScreen from "./screens/StaffScreen";
+import StaffEditScreen from "./screens/StaffEditScreen";
+import StaffTypeEditScreen from "./screens/StaffTypeEditScreen";
+import AddStaff from "./screens/AddStaff";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,17 +39,44 @@ function App() {
     <>
       <Router>
         <Switch>
-          <PrivateRouter path="/" component={HomeScreen} exact />
-          <PrivateRouter path="/products" component={ProductScreen} />
-          <PrivateRouter path="/orders" component={OrderScreen} />
-          <PrivateRouter path="/order/:id" component={OrderDetailScreen} />
-          <PrivateRouter path="/add-product" component={AddProduct} />
-          <PrivateRouter path="/users" component={UsersScreen} />
+          <PrivateRouter exact path="/" component={HomeScreen} />
+          <PrivateRouter exact path="/products" component={ProductScreen} />
+          <PrivateRouter exact path="/orders" component={OrderScreen} />
           <PrivateRouter
+            exact
+            path="/order/:id"
+            component={OrderDetailScreen}
+          />
+          <PrivateRouter exact path="/add-product" component={AddProduct} />
+          <PrivateRouter
+            exact
+            path="/add-staff-type"
+            component={AddStaffType}
+          />
+
+          <PrivateRouter exact path="/add-staff" component={AddStaff} />
+
+          <PrivateRouter exact path="/customers" component={UsersScreen} />
+          <PrivateRouter exact path="/staffs" component={StaffScreen} />
+          <PrivateRouter
+            exact
+            path="/staff-types"
+            component={StaffTypeScreen}
+          />
+
+          <PrivateRouter
+            exact
             path="/product/:id/edit"
             component={ProductEditScreen}
           />
-          <Route path="/login" component={Login} />
+          <PrivateRouter
+            exact
+            path="/staff-types/:id"
+            component={StaffTypeEditScreen}
+          />
+          <PrivateRouter exact path="/staffs/:id" component={StaffEditScreen} />
+
+          <Route exact path="/login" component={Login} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

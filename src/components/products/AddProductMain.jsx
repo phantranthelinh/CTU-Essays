@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { PRODUCT_CREATE_RESET } from "./../../Redux/Constants/ProductConstants";
-import { createProduct } from "./../../Redux/Actions/ProductActions";
-import Message from "./../LoadingError/Error";
-import Loading from "./../LoadingError/Loading";
-import Toast from "./../LoadingError/Toast";
+import { PRODUCT_CREATE_RESET } from "../../Redux/Constants/ProductConstants";
+import { createProduct } from "../../Redux/Actions/ProductActions";
+import Message from "../LoadingError/Error";
+import Loading from "../LoadingError/Loading";
+import Toast from "../LoadingError/Toast";
+import { resizeFile } from "../../helper/fileHelper";
 const ToastObjects = {
   pauseOnFocusLoss: false,
   draggable: false,
@@ -15,32 +16,59 @@ const ToastObjects = {
 };
 const AddProductMain = () => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [image, setImage] = useState("");
-  const [countInStock, setCountInStock] = useState("");
+  const [sellPrice, setSellPrice] = useState(0);
+  const [importPrice, setImportPrice] = useState(0);
+  const [base64, setBase64] = useState("");
+  const [file, setFile] = useState(null);
+  const [qty, setQty] = useState("");
   const [description, setDescription] = useState("");
 
   const dispatch = useDispatch();
 
   const productCreate = useSelector((state) => state.productCreate);
   const { loading, error, product } = productCreate;
+  const onChangeFile = async (e) => {
+    const selected = e.target.files[0];
+    setBase64("");
+
+    if (selected) {
+      const maxWidth = 500;
+      const maxHeight = 500;
+      setFile(selected);
+      const image = await resizeFile(selected, maxWidth, maxHeight);
+      if (image) {
+        setBase64(image);
+      }
+    }
+  };
 
   useEffect(() => {
     if (product) {
-      toast.success("Product added", ToastObjects);
+      toast.success("Thêm mới sản phẩm thành công", ToastObjects);
       dispatch({ type: PRODUCT_CREATE_RESET });
       setName("");
       setDescription("");
-      setImage("");
-      setPrice(0);
-      setCountInStock(0);
+      setBase64("");
+      setSellPrice(0);
+      setImportPrice(0);
+      setQty(0);
     }
   }, [dispatch, product]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProduct(name, price, description, image, countInStock));
+    dispatch(
+      createProduct(
+        name,
+        sellPrice,
+        importPrice,
+        description,
+        base64,
+        qty
+      )
+    );
   };
+
   return (
     <>
       <Toast />
@@ -79,17 +107,33 @@ const AddProductMain = () => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="product_price" className="form-label">
-                      Đơn giá
+                    <label htmlFor="product_price1" className="form-label">
+                      Giá nhập
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       placeholder="Nhập vào đây..."
                       className="form-control"
-                      id="product_price"
+                      id="product_price1"
                       required
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
+                      style={{ textAlign: "right" }}
+                      value={importPrice}
+                      onChange={(e) => setImportPrice(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <label htmlFor="product_price2" className="form-label">
+                      Giá bán
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Nhập vào đây..."
+                      className="form-control"
+                      id="product_price2"
+                      style={{ textAlign: "right" }}
+                      required
+                      value={sellPrice}
+                      onChange={(e) => setSellPrice(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
@@ -100,10 +144,11 @@ const AddProductMain = () => {
                       type="number"
                       placeholder="Nhập vào đây..."
                       className="form-control"
+                      style={{ textAlign: "right" }}
                       id="product_price"
                       required
-                      value={countInStock}
-                      onChange={(e) => setCountInStock(e.target.value)}
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
                     />
                   </div>
                   <div className="mb-4">
@@ -121,12 +166,10 @@ const AddProductMain = () => {
                     <label className="form-label">Hình ảnh</label>
                     <input
                       className="form-control"
-                      type="text"
-                      placeholder="Nhập vào đây..."
-                      value={image}
-                      onChange={(e) => setImage(e.target.value)}
+                      type="file"
+                      onChange={onChangeFile}
                     />
-                    <input className="form-control mt-3" type="file" />
+                    {file !== null ? <img src={base64} alt="Product_Photo" /> : null}
                   </div>
                 </div>
               </div>

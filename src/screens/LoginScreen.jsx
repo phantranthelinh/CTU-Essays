@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { login } from "./../Redux/Actions/UserActions";
-import Message from "./../components/LoadingError/Error";
-import Loading from "./../components/LoadingError/Loading";
-import Toast from "./../components/LoadingError/Toast";
+import { login } from "../Redux/Actions/UserActions";
+import Message from "../components/LoadingError/Error";
+import Loading from "../components/LoadingError/Loading";
+import Toast from "../components/LoadingError/Toast";
 
 const Login = ({ location, history }) => {
   window.scrollTo(0, 0);
