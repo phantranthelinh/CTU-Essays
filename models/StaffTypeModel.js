@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const userTypeSchema = mongoose.Schema({
+const staffTypeSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
 
@@ -10,5 +10,5 @@ const userTypeSchema = mongoose.Schema({
         required: true
     }
 })
-const UserTypes = mongoose.model("UserTypes" , userTypeSchema)
-module.exports = UserTypes
+const StaffType = mongoose.model("StaffType" , staffTypeSchema)
+module.exports = StaffType

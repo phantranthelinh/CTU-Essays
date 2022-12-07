@@ -1,7 +1,8 @@
 const User = require("../models/UserModel");
+const Address = require("../models/AddressModel");
 const asyncHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
-const UserController = {
+module.exports =  {
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -28,14 +29,18 @@ const UserController = {
       res.status(400);
       throw new Error("Tài khoản đã tồn tại");
     }
-    const user = await User.create({
+    const user = new User({
       name,
       email,
       password,
       phone,
     });
-    user.address.push(address)
     await user.save();
+    const addressCreated = new Address({
+      userId: user._id,
+      address: address
+    })
+    const addressSaved= await addressCreated.save()
     if (user) {
       res.status(200).json({
         _id: user._id,
@@ -44,14 +49,15 @@ const UserController = {
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
         createAt: user.createdAt,
+        address: addressSaved.address
       });
     } else {
       res.status(400);
       throw new Error("Dữ liệu chưa đúng định dạng");
     }
   }),
-  profile: asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
+  get: asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id).populate({path: "address" , select: "address"});
     if (user) {
       res.json({
         _id: user._id,
@@ -69,7 +75,7 @@ const UserController = {
   }),
 
   //UPDATE PROFILE
-  profile: asyncHandler(async (req, res) => {
+  update: asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if (user) {
       user.name = req.body.name || user.name;
@@ -97,10 +103,9 @@ const UserController = {
       throw new Error("Không tìm thấy người dùng");
     }
   }),
-  getAllUsers: asyncHandler(async (req, res) => {
+  getAll: asyncHandler(async (req, res) => {
     const users = await User.find();
     res.json(users);
   }),
 };
 
-module.exports = UserController;

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Order = require("../models/OrderModel");
 const asyncHandler = require("express-async-handler");
 
-const OrderController = {
+module.exports = {
   // CREATE ORDER
   create: asyncHandler(async (req, res) => {
     const {
@@ -81,4 +81,3 @@ const OrderController = {
   }),
 };
 
-module.exports = OrderController;

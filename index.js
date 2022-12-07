@@ -5,8 +5,10 @@ const productRouter = require("./routes/productRoute")
 const orderRouter = require("./routes/orderRoute")
 const reviewRouter = require("./routes/reviewRoute")
 const importRouter = require("./routes/importRoute")
+const staffRouter = require("./routes/staffRoute")
+const staffTypeRouter = require("./routes/staffTypeRoute")
 const {notFound, errorHandler} = require("./middleware/error")
-const userRouter = require("./routes/userRoute")
+const customerRouter = require("./routes/customerRoute")
 var cors = require("cors")
 
 dotenv.config()
@@ -21,13 +23,20 @@ app.use(morgan("dev"))
 app.use(bodyParser.urlencoded({ limit: "100mb" , extended: true }));
 
 // API
-
+//PRODUCT ROUTE
 app.use("/api/products", productRouter)
-app.use("/api/users", userRouter)
+//USER ROUTE
+app.use("/api/customers", customerRouter)
+//ORDER ROUTE
 app.use("/api/orders", orderRouter)
+//REVIEWS ROUTE
 app.use("/api/reviews", reviewRouter)
+//STAFF ROUTE
+app.use("/api/staffs", staffRouter)
+//STAFF TYPE ROUTE
+app.use("/api/stafftypes", staffTypeRouter)
 
-// IMPORT DATA API 
+// IMPORT DATA ROUTE 
 app.use("/api/import", importRouter)
 
 //ERROR HANDLER

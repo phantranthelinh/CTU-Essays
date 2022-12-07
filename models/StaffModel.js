@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = mongoose.Schema(
+const staffSchema = mongoose.Schema(
   {
     name: {
       type: String,
@@ -16,17 +16,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
+    staffType: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Address"
-    },
-    phone:{
-      type: Number, 
-    },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
+      ref: "StaffType",
     },
   },
   {
@@ -34,13 +26,12 @@ const userSchema = mongoose.Schema(
   }
 );
 // Login
-userSchema.methods.matchPassword = async function (enterPassword) {
+staffSchema.methods.matchPassword = async function (enterPassword) {
   return await bcrypt.compare(enterPassword, this.password);
 };
 
 // Register
-
-userSchema.pre("save", async function (next) {
+staffSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
@@ -48,6 +39,6 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.model("User", userSchema);
+const Staff = mongoose.model("Staff", staffSchema);
 
-module.exports = User;
+module.exports = Staff;
