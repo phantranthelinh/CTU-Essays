@@ -199,7 +199,14 @@ textarea:focus {
   padding: 15px;
   border: 1px solid #f3f3f3;
   border-radius: 5px;
+  transition: all 0.5s ease;
   box-shadow: rgba(5, 87, 2, 0.1) 0px 4px 6px -1px, rgba(137, 244, 97, 0.06) 0px 2px 4px -1px;
+
+}
+.border-product:hover{
+  border: 2px solid rgb(33, 237, 33);
+
+
 }
 .shopBack {
   height: 250px;
@@ -854,4 +861,11 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#004ec2", en
 .page-item.active .page-link {
   background-color: black;
   border: 1px solid black;
+}
+
+.it-me{
+  opacity: 1;
+}
+.not-me{
+  opacity: 0.6;
 }

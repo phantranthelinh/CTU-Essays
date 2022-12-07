@@ -9,6 +9,13 @@ import {
   PRODUCT_CREATE_REVIEW_FAIL,
   PRODUCT_CREATE_REVIEW_SUCCESS,
   PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_LIST_REVIEW_REQUEST,
+  PRODUCT_LIST_REVIEW_SUCCESS,
+  PRODUCT_LIST_REVIEW_FAIL,
+  PRODUCT_LIST_REVIEW_RESET,
+  PRODUCT_DELETE_REVIEW_REQUEST,
+  PRODUCT_DELETE_REVIEW_SUCCESS,
+  PRODUCT_DELETE_REVIEW_FAIL,
 } from "../Constants/ProductConstants";
 
 //PRODUCT LIST
@@ -52,7 +59,6 @@ export const productDetailsReducer = (
 };
 
 //CREATE REVIEW
-
 export const productCreateReviewReducer = (state = {}, action) => {
   // eslint-disable-next-line default-case
   switch (action.type) {
@@ -68,3 +74,36 @@ export const productCreateReviewReducer = (state = {}, action) => {
       return state;
   }
 };
+
+//LIST REVIEW REDUCER
+export const productReviewsReducer = (state = { reviews: []}, action) => {
+  // eslint-disable-next-line default-case
+  switch (action.type) {
+    case PRODUCT_LIST_REVIEW_REQUEST:
+      return { ...state, loading: true };
+    case PRODUCT_LIST_REVIEW_SUCCESS:
+      return { loading: false, success: true , reviews: action.payload };
+    case PRODUCT_LIST_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+    case PRODUCT_LIST_REVIEW_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+//DELETE REVIEW
+export const deleteReviewsReducer = (state = {}, action) => {
+  // eslint-disable-next-line default-case
+  switch (action.type) {
+    case PRODUCT_DELETE_REVIEW_REQUEST:
+      return { ...state, loading: true };
+    case PRODUCT_DELETE_REVIEW_SUCCESS:
+      return { loading: false, success: true , message: action.payload };
+    case PRODUCT_DELETE_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+  
+    default:
+      return state;
+  }
+};
+

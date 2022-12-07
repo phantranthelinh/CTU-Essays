@@ -46,7 +46,7 @@ const ShopSection = (props) => {
                         <div className="border-product " data-aos="zoom-in">
                           <Link to={`/products/${product._id}`}>
                             <div className="shopBack">
-                              <img src={product.image} alt={product.name} />
+                              <img src={product.image.base64} alt={product.name} />
                             </div>
                           </Link>
 
@@ -64,7 +64,7 @@ const ShopSection = (props) => {
                             <h3 style={{ color: "red" }}>
                               {Intl.NumberFormat("VN", {
                                 maximumSignificantDigits: 3,
-                              }).format(product.price)}{" "}
+                              }).format(product.salePrice)}{" "}
                               VNĐ
                             </h3>
                           </div>
