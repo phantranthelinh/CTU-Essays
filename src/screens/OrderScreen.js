@@ -1,12 +1,12 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import Header from "./../components/Header";
-import { useDispatch, useSelector } from "react-redux";
-import { getOrderDetails, payOrder } from "../Redux/Actions/OrderActions";
-import Loading from "./../components/LoadingError/Loading";
-import Message from "./../components/LoadingError/Error";
 import moment from "moment";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getOrderDetails, payOrder } from "../Redux/Actions/OrderActions";
+import Header from "./../components/Header";
+import Message from "./../components/LoadingError/Error";
+import Loading from "./../components/LoadingError/Loading";
 
 const OrderScreen = (props) => {
   window.scrollTo(0, 0);
@@ -51,6 +51,8 @@ const OrderScreen = (props) => {
       <Header />
 
       <div className="container">
+        <h2 className="text-center mt-4">Thông tin đơn hàng</h2>
+
         {loading ? (
           <Loading />
         ) : error ? (
@@ -91,18 +93,18 @@ const OrderScreen = (props) => {
                     <h5>
                       <strong>Thông tin đặt hàng</strong>
                     </h5>
-                    <p>Hình thức thanh toán: {order?.paymentMethod}</p>
+                    <p>Hình thức thanh toán: {order?.orderDetails?.paymentMethod}</p>
                     {order?.isPaid ? (
                       <div className="bg-info p-2 col-12">
                         <p className="text-white text-center text-sm-start">
-                          Hoàn thành đặt hàng vào lúc{" "}
+                          Đã thanh toán
                           {moment(Date.now()).format("HH:mm:ss DD/MM/YYYY")}
                         </p>
                       </div>
                     ) : (
-                      <div className="bg-danger p-2 col-12">
+                      <div className="bg-info p-2 col-12">
                         <p className="text-white text-center text-sm-start">
-                          Chưa hoàn thành đặt hàng
+                          Chưa thanh toán
                         </p>
                       </div>
                     )}
@@ -121,19 +123,16 @@ const OrderScreen = (props) => {
                     <h5>
                       <strong>Vận chuyển đến</strong>
                     </h5>
-                    <p>
-                      Địa chỉ:{" "}
-                      {`${order?.orderDetails?.shippingAddress}`}
-                    </p>
+                    <p>Địa chỉ: {`${order?.orderDetails?.shippingAddress}`}</p>
                     {order?.isDelivered ? (
                       <div className="bg-success p-1 col-12">
                         <p className="text-white text-center text-sm-start">
                           Đã vận chuyển lúc{" "}
-                          {moment(order.deliveredAt).calendar()}
+                          {moment(order?.orderDetails?.deliveredAt).calendar()}
                         </p>
                       </div>
                     ) : (
-                      <div className="bg-danger p-1 col-12">
+                      <div className="bg-info p-1 col-12">
                         <p className="text-white text-center text-sm-start">
                           Chưa vận chuyển
                         </p>
@@ -223,14 +222,14 @@ const OrderScreen = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                <div className="col-12" >
-                    {loadingPay && <Loading />}
-                    {order?.isPaid ? (
+                {/* <div className="col-12">
+                  {loadingPay && <Loading />}
+                  {order?.isPaid ? (
                     <></>
-                    ) :(
+                  ) : (
                     <button onClick={orderPayHandler}>Hoàn tất đặt hàng</button>
-                    )}
-                  </div>
+                  )}
+                </div> */}
               </div>
             </div>
           </>
