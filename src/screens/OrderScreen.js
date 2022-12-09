@@ -26,7 +26,7 @@ const OrderScreen = (props) => {
       return Math.round(num * 100) / 100;
     };
     order.itemsPrice = addDecimals(
-      order.orderItems.reduce((acc, item) => {
+      order?.orderDetails?.orderItems.reduce((acc, item) => {
         return acc + item.price * item.qty;
       }, 0)
     );
@@ -35,6 +35,7 @@ const OrderScreen = (props) => {
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
   }, [dispatch, orderId, successPay]);
+
   const orderPayHandler = () => {
     const paymentResult = {
       id: orderId,
@@ -68,11 +69,11 @@ const OrderScreen = (props) => {
                     <h5>
                       <strong>Thông tin khách hàng</strong>
                     </h5>
-                    <p>Tên: {order?.user.name}</p>
+                    <p>Tên: {order?.user?.name}</p>
                     <p>
                       Email:{" "}
-                      <a href={`mailto:${order?.user.email}`}>
-                        {order?.user.email}
+                      <a href={`mailto:${order?.user?.email}`}>
+                        {order?.user?.email}
                       </a>
                     </p>
                   </div>
@@ -95,7 +96,7 @@ const OrderScreen = (props) => {
                       <div className="bg-info p-2 col-12">
                         <p className="text-white text-center text-sm-start">
                           Hoàn thành đặt hàng vào lúc{" "}
-                          {moment(Date.now()).format("hh:mm DD/MM/YYYY")}
+                          {moment(Date.now()).format("HH:mm:ss DD/MM/YYYY")}
                         </p>
                       </div>
                     ) : (
@@ -122,9 +123,9 @@ const OrderScreen = (props) => {
                     </h5>
                     <p>
                       Địa chỉ:{" "}
-                      {`${order?.shippingAddress.address}, ${order?.shippingAddress.city}, ${order?.shippingAddress.country}`}
+                      {`${order?.orderDetails?.shippingAddress}`}
                     </p>
-                    {order.isDelivered ? (
+                    {order?.isDelivered ? (
                       <div className="bg-success p-1 col-12">
                         <p className="text-white text-center text-sm-start">
                           Đã vận chuyển lúc{" "}
@@ -145,16 +146,16 @@ const OrderScreen = (props) => {
 
             <div className="row order-products justify-content-between">
               <div className="col-lg-8">
-                {order?.orderItems.length === 0 ? (
+                {order?.orderDetails?.orderItems?.length === 0 ? (
                   <Message variant="alert-info mt-5">
                     Thông tin đặt hàng hiện đang trống
                   </Message>
                 ) : (
-                  order?.orderItems.map((item, idx) => {
+                  order?.orderDetails?.orderItems?.map((item, idx) => {
                     return (
                       <div key={idx} className="order-product row">
                         <div className="col-md-3 col-6">
-                          <img src={item.image} alt={item.name} />
+                          <img src={item?.image?.base64} alt={item.name} />
                         </div>
                         <div className="col-md-5 col-6 d-flex align-items-center">
                           <Link to={`/`}>
@@ -204,7 +205,7 @@ const OrderScreen = (props) => {
                         <td>
                           {Intl.NumberFormat("VN", {
                             maximumSignificantDigits: 3,
-                          }).format(order?.shippingPrice)}{" "}
+                          }).format(order?.orderDetails?.shippingPrice)}{" "}
                           VNĐ
                         </td>
                       )}
@@ -216,7 +217,7 @@ const OrderScreen = (props) => {
                       <td>
                         {Intl.NumberFormat("VN", {
                           maximumSignificantDigits: 3,
-                        }).format(order?.totalPrice)}{" "}
+                        }).format(order?.orderDetails?.totalPrice)}{" "}
                         VNĐ
                       </td>
                     </tr>

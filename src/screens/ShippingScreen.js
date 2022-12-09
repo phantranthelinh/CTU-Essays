@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import { useDispatch, useSelector } from "react-redux";
+import { getUserDetails } from "../Redux/Actions/UserActions";
 import { saveShippingAddress } from "./../Redux/Actions/CartActions";
 const ShippingScreen = ({ history }) => {
   window.scrollTo(0, 0);
@@ -9,14 +10,26 @@ const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
-  const [address, setAddress] = useState(shippingAddress.address);
+  const [address, setAddress] = useState(shippingAddress);
   const [newAddress, setNewAddress] = useState("");
   const [typeAddress, setTypeAddress] = useState("select");
   const dispatch = useDispatch();
-  
   const userLogin = useSelector((state) => state.userLogin);
   const {  userInfo } = userLogin;
 
+  const userDetails = useSelector((state) => state.userDetails);
+  const {  user } = userDetails;
+
+
+  useEffect(() => {
+    dispatch(getUserDetails(userInfo._id))
+  },[dispatch , userInfo._id])
+
+  useEffect(() =>{
+    if(user?.addresses?.length ===0){
+      setTypeAddress("input")
+    }
+  },[user?.addresses?.length])
   const submitHandler = (e) => {
     e.preventDefault();
     if (typeAddress === "select") {
@@ -26,6 +39,8 @@ const ShippingScreen = ({ history }) => {
     }
     history.push("/payment");
   };
+  
+
   return (
     <>
       <Header />
@@ -35,7 +50,8 @@ const ShippingScreen = ({ history }) => {
           onSubmit={submitHandler}
         >
           <h6>ĐỊA CHỈ GIAO HÀNG</h6>
-          <div className="radio-group">
+          {user?.addresses?.length !== 0 ? <>
+            <div className="radio-group">
             <input
               type="radio"
               value="select"
@@ -54,11 +70,12 @@ const ShippingScreen = ({ history }) => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             >
-              {userInfo?.address.map((address, i) => (
-                <option key={i} value={address}>
-                  {address}
-                </option>
-              ))}
+              {user?.addresses?.length > 0 &&
+                user?.addresses?.map((item, i) => (
+                  <option key={i} value={item.address}>
+                    {item.address}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="radio-group mt-4">
@@ -66,11 +83,14 @@ const ShippingScreen = ({ history }) => {
               type="radio"
               value="input"
               name="address"
-              onChange={(e) => setTypeAddress("input")}
+              onChange={(e) => setTypeAddress(`input`)}
               id="address2"
             />
             <label htmlFor="address2">Địa chỉ khác</label>
           </div>
+          </> : null}
+        
+          
           <input
             disabled={typeAddress !== "input"}
             type="text"

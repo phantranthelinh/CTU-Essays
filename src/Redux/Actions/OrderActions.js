@@ -103,7 +103,6 @@ export const payOrder =
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-
       const { data } = await axios.put(
         `/api/orders/${orderId}/pay`,
         paymentResult,
@@ -143,7 +142,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `/api/orders/`,
+      `/api/customers/${userInfo?._id}/orders`,
       config
     );
     await dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });

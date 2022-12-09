@@ -21,7 +21,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
       product: data._id,
       name: data.name,
       image: data.image,
-      price: data.price,
+      price: data.salePrice,
       countInStock: data.countInStock,
       qty,
     },
@@ -51,15 +51,13 @@ export const saveShippingAddress =
       },
     };
     const { data } = await axios.put(
-      `/api/users/profile`,
+      `/api/customers/${userInfo._id}`,
       { address },
       config
     );
-    console.log(data)
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-    dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: data });
-    // localStorage.setItem("shippingAddress", JSON.stringify(data))
+    dispatch({ type: CART_SAVE_SHIPPING_ADDRESS, payload: address });
   };
 //SAVE PAYMENT METHOD
 

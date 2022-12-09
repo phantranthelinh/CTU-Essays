@@ -711,7 +711,7 @@ textarea:focus {
   filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#00C310", endColorstr="#7BEDB2", GradientType=1 );
   color: #ffffff;
 }
-.cart-buttons a:nth-child(1) button {
+.cart-buttons a:nth-child(2) button {
   background: rgb(10, 10, 10);
 
   background: linear-gradient(45deg, rgb(10, 10, 10) 0%, rgb(10, 10, 10) 100%);

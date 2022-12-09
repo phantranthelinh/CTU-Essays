@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "./../components/Header";
-import { register } from "./../Redux/Actions/UserActions";
 import Message from "./../components/LoadingError/Error";
 import Loading from "./../components/LoadingError/Loading";
+import { register } from "./../Redux/Actions/UserActions";
 
 const Register = ({ location, history }) => {
   window.scrollTo(0, 0);
@@ -12,9 +12,7 @@ const Register = ({ location, history }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
 
-  const [phone, setPhone] = useState("");
 
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -30,7 +28,7 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password,address, phone));
+    dispatch(register(name, email, password));
   };
   return (
     <>
@@ -60,19 +58,6 @@ const Register = ({ location, history }) => {
             placeholder="Mật khẩu"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input
-            className="mt-2"
-            type="text"
-            placeholder="Địa chỉ"
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          <input
-            className="mt-2"
-            type="text"
-            placeholder="Số điện thoại"
-            onChange={(e) => setPhone(e.target.value)}
-          />
-
           <button type="submit">Đăng ký</button>
           <p>
             <Link to={redirect ? `/login?redicrect=${redirect}` : "/login"}>

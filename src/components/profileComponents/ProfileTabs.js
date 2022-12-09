@@ -22,12 +22,12 @@ const ProfileTabs = () => {
     autoClose: 2000,
     theme: "colored",
   };
+
   const toastId = useRef(null);
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { loading: updateLoading } = userUpdateProfile;
@@ -39,21 +39,27 @@ const ProfileTabs = () => {
       setAddress(user.address);
     }
   }, [dispatch, user]);
+
+  const handleChangeAddressDefault = (e) => {};
+
   const submitHandler = (e) => {
     e.preventDefault();
-    //Password match
-
+    // Password match
     if (password !== confirmPassword) {
       if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error("Password does not match", ToastObjects);
+        toastId.current = toast.error(
+          "Mật khẩu và xác nhận lại mật khẩu không trùng khớp",
+          ToastObjects
+        );
       }
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, password, phone, address }));
       if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.success("Updated successfully", ToastObjects);
+        toastId.current = toast.success("Cập nhật thành công", ToastObjects);
       }
     }
   };
+
   return (
     <>
       <Toast />
@@ -62,23 +68,25 @@ const ProfileTabs = () => {
       {updateLoading && <Loading />}
 
       <form className="row  form-container" onSubmit={submitHandler}>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <div className="form">
             <label htmlFor="account-fn">Tên người dùng</label>
             <input
               className="form-control"
               type="text"
               defaultValue={name}
+              disabled
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
         </div>
 
-        <div className="col-md-6">
+        <div className="col-md-12">
           <div className="form">
             <label htmlFor="account-email">Địa chỉ email</label>
             <input
+              disabled
               className="form-control"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -86,7 +94,7 @@ const ProfileTabs = () => {
             />
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-12">
           <div className="form">
             <label htmlFor="account-pass">Số điện thoại</label>
             <input
@@ -106,6 +114,20 @@ const ProfileTabs = () => {
               defaultValue={address}
               onChange={(e) => setAddress(e.target.value)}
             />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
+            <label htmlFor="account-pass">Địa chỉ đã nhập</label>
+            <select
+              className="mt-2"
+              style={{ padding: "16px", width: "100%" }}
+              onChange={handleChangeAddressDefault}
+            >
+              {user?.addresses?.map((address) => {
+                return <option key={address?._id} value={address._id}>{address.address}</option>;
+              })}
+            </select>
           </div>
         </div>
         <div className="col-md-6">

@@ -38,7 +38,6 @@ const SingleProduct = ({ history, match }) => {
   const { reviews  } = productReviews;
   const HandleAddToCart = (e) => {
     e.preventDefault();
-
     history.push(`/cart/${productId}?qty=${qty}`);
   };
 
@@ -47,7 +46,7 @@ const SingleProduct = ({ history, match }) => {
   useEffect(() => {
     if (successCreateReview) {
       if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.success("Add successful review");
+        toastId.current = toast.success("Thêm đánh giá thành công");
       }
       setRating(0);
       setComment("");
@@ -172,7 +171,7 @@ const SingleProduct = ({ history, match }) => {
                   <Rating value={review?.rating} />
                   <span>Vào lúc {moment(review?.createdAt).format("hh:mm:ss DD/MM/YYYY")}</span>
                   <div className="alert alert-info mt-3">{review?.comment}</div>
-                  {userInfo?._id.toString() === review?.userId?._id.toString() ? <span onClick={() => handleDeleteReview(review._id)}>Xóa đánh giá</span> : null}
+                  {userInfo?._id.toString() === review?.userId?._id.toString() ? <span onClick={() =>handleDeleteReview(review._id)}>Xóa đánh giá</span> : null}
                 </div>
               );
             })}

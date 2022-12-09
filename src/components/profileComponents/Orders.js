@@ -46,18 +46,18 @@ const Orders = (props) => {
                       >
                         <td>
                           <a href={`/order/${order._id}`} className="link">
-                            {order.user.substr(-4) + "-" + order._id.substr(-7)}
+                            {order?.user?.name.substr(-4) + "-" + order._id.substr(-7)}
                           </a>
                         </td>
                         <td>
-                          {order.isPaid ? "Đã hoàn thành đặt hàng" : "chưa hoàn thành đặt hàng"}
+                          {order?.orderDetails.isPaid ? "Đã hoàn thành đặt hàng" : "chưa hoàn thành đặt hàng"}
                         </td>
                         <td>
                           {order.isPaid
-                            ? moment(order.paidAt).format("DD/MM/YYYY")
-                            : moment(order.createdAt).format("DD/MM/YYYY")}
+                            ? moment(order?.orderDetails?.paidAt).format("HH:mm:ss DD/MM/YYYY")
+                            : moment(order?.orderDetails?.createdAt).format("HH:mm:ss DD/MM/YYYY")}
                         </td>
-                        <td style={{color : "red"}}>{Intl.NumberFormat('VN',{maximumSignificantDigits: 3}).format(order.totalPrice)} VNĐ</td>
+                        <td style={{color : "red"}}>{Intl.NumberFormat('VN',{maximumSignificantDigits: 3}).format(order.orderDetails.totalPrice)} VNĐ</td>
                       </tr>
                     );
                   })}

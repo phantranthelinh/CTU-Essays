@@ -1,23 +1,30 @@
+import moment from "moment";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import ProfileTabs from "../components/profileComponents/ProfileTabs";
+import { listMyOrders } from "../Redux/Actions/OrderActions";
 import { getUserDetails } from "../Redux/Actions/UserActions";
 import Orders from "./../components/profileComponents/Orders";
-import moment from "moment";
-import { listMyOrders } from "../Redux/Actions/OrderActions";
 const ProfileScreen = () => {
   window.scrollTo(0, 0);
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  
 
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading, error, orders } = orderListMy;
+
   useEffect(() => {
     dispatch(listMyOrders());
-    dispatch(getUserDetails("profile"));
+    dispatch(getUserDetails(userInfo?._id));
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
+
+
+
   return (
     <>
       <Header />
@@ -43,15 +50,15 @@ const ProfileScreen = () => {
               </div>
             </div>
             <div className="wizard pt-3 ">
-              <div class="d-flex align-items-start">
+              <div className="d-flex align-items-start">
                 <div
-                  class="nav align-items-start flex-column col-12 nav-pills me-3 "
+                  className="nav align-items-start flex-column col-12 nav-pills me-3 "
                   id="v-pills-tab"
                   role="tablist"
                   aria-orientation="vertical"
                 >
                   <button
-                    class="nav-link active"
+                    className="nav-link active"
                     id="v-pills-home-tab"
                     data-bs-toggle="pill"
                     data-bs-target="#v-pills-home"
@@ -63,7 +70,7 @@ const ProfileScreen = () => {
                     Chỉnh sửa tài khoản
                   </button>
                   <button
-                    class="nav-link d-flex justify-content-between"
+                    className="nav-link d-flex justify-content-between"
                     id="v-pills-profile-tab"
                     data-bs-toggle="pill"
                     data-bs-target="#v-pills-profile"
@@ -82,19 +89,19 @@ const ProfileScreen = () => {
 
           {/* panels */}
           <div
-            class="tab-content col-lg-8 pb-5 pt-lg-0 pt-3"
+            className="tab-content col-lg-8 pb-5 pt-lg-0 pt-3"
             id="v-pills-tabContent"
           >
             <div
-              class="tab-pane fade show active"
+              className="tab-pane fade show active"
               id="v-pills-home"
               role="tabpanel"
               aria-labelledby="v-pills-home-tab"
             >
-              <ProfileTabs />
+              <ProfileTabs/>
             </div>
             <div
-              class="tab-pane fade"
+              className="tab-pane fade"
               id="v-pills-profile"
               role="tabpanel"
               aria-labelledby="v-pills-profile-tab"

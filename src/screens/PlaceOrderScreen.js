@@ -49,7 +49,6 @@ const PlaceOrderScreen = ({ history }) => {
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [history, dispatch, success, order]);
-
   return (
     <>
       <Header />
@@ -59,7 +58,7 @@ const PlaceOrderScreen = ({ history }) => {
             <div className="row ">
               <div className="col-md-4 center">
                 <div className="alert-success order-box">
-                  <i class="fas fa-user"></i>
+                  <i className="fas fa-user"></i>
                 </div>
               </div>
               <div className="col-md-8 center">
@@ -101,7 +100,7 @@ const PlaceOrderScreen = ({ history }) => {
                 </h5>
                 <p>
                   Địa chỉ:{" "}
-                  {`${cart.shippingAddress.address}, ${cart.shippingAddress.city} `}
+                  {`${cart.shippingAddress} `}
                 </p>
               </div>
             </div>
@@ -117,7 +116,7 @@ const PlaceOrderScreen = ({ history }) => {
                 {cart.cartItems.map((item, idx) => (
                   <div className="order-product row" key={idx}>
                     <div className="col-md-3 col-6">
-                      <img src={item.image} alt={item.name} />
+                      <img src={item.image.base64} alt={item.name} />
                     </div>
                     <div className="col-md-5 col-6 d-flex align-items-center">
                       <Link to={`/products/${item.product}`}>

@@ -131,14 +131,15 @@ const CartScreen = ({ match, location, history }) => {
             </div>
             <hr />
             <div className="cart-buttons d-flex align-items-center row">
-              <Link to="/" className="col-md-6 ">
-                <button>quay lại mua hàng</button>
-              </Link>
+              
               {!validate?.quantity?.error && total > 0 && (
                 <div className="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
                   <button onClick={HandleCheckOut}>Tiếp tục</button>
                 </div>
               )}
+              <Link to="/" className="col-md-6 ">
+                  <button>Quay lại mua hàng</button>
+                </Link>
             </div>
           </>
         )}
