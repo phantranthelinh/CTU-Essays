@@ -95,11 +95,10 @@ const OrderScreen = (props) => {
                       <strong>Thông tin đặt hàng</strong>
                     </h5>
                     <p>Hình thức thanh toán: {order?.orderDetails?.paymentMethod}</p>
-                    {order?.isPaid ? (
-                      <div className="bg-info p-2 col-12">
+                    {order?.orderDetails?.isPaid ? (
+                      <div className="bg-success p-2 col-12">
                         <p className="text-white text-center text-sm-start">
                           Đã thanh toán
-                          {moment(Date.now()).format("HH:mm:ss DD/MM/YYYY")}
                         </p>
                       </div>
                     ) : (

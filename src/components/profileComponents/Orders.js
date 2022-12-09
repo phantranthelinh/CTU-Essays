@@ -31,33 +31,48 @@ const Orders = (props) => {
                 <thead>
                   <tr>
                     <th>Mã đơn hàng</th>
-                    <th>Trạng thái</th>
                     <th>Ngày đặt hàng</th>
+                    <th>Trạng thái</th>
+                    <th>Thanh toán</th>
                     <th>Tổng tiền</th>
                   </tr>
                 </thead>
                 <tbody>
                   {orders?.map((order, index) => {
                     return (
-                      <tr key={index}
-                        className={`${
-                          order.orderDetails.isDelivered ? "alert-success" : ""
-                        }`}
-                      >
+                      <tr key={index}>
                         <td>
                           <a href={`/order/${order._id}`} className="link">
-                            {order?.user?.name.substr(-4) + "-" + order._id.substr(-7)}
+                            {order?.user?.name.substr(-4) +
+                              "-" +
+                              order._id.substr(-7)}
                           </a>
                         </td>
                         <td>
-                          {order?.orderDetails.isDelivered ? "Đang giao hàng" : "Đang chuyển cho bên vận chuyển"}
+                          {order?.orderDetails.isDelivered
+                            ? "Đang giao hàng"
+                            : "Đang chuyển cho bên vận chuyển"}
+                        </td>
+                        <td>
+                          {order?.orderDetails.isPaid
+                            ? "Đã thanh toán"
+                            : "Chưa thanh toán"}
                         </td>
                         <td>
                           {order.isPaid
-                            ? moment(order?.orderDetails?.paidAt).format("HH:mm:ss DD/MM/YYYY")
-                            : moment(order?.orderDetails?.createdAt).format("HH:mm:ss DD/MM/YYYY")}
+                            ? moment(order?.orderDetails?.paidAt).format(
+                                "HH:mm:ss DD/MM/YYYY"
+                              )
+                            : moment(order?.orderDetails?.createdAt).format(
+                                "HH:mm:ss DD/MM/YYYY"
+                              )}
                         </td>
-                        <td style={{color : "red"}}>{Intl.NumberFormat('VN',{maximumSignificantDigits: 3}).format(order.orderDetails.totalPrice)} VNĐ</td>
+                        <td style={{ color: "red" }}>
+                          {Intl.NumberFormat("VN", {
+                            maximumSignificantDigits: 3,
+                          }).format(order.orderDetails.totalPrice)}{" "}
+                          VNĐ
+                        </td>
                       </tr>
                     );
                   })}
