@@ -4,7 +4,7 @@ const generateToken = require("../utils/generateToken");
 module.exports = {
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const staff = await Staff.findOne({ email });
+    const staff = await Staff.findOne({ email }).populate({path: "staffType"});
     if (staff && (await staff.matchPassword(password))) {
       res.json({
         _id: staff._id,
