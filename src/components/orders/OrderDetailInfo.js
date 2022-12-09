@@ -12,8 +12,8 @@ const OrderDetailInfo = (props) => {
           <div className="text">
             <h6 className="mb-1">Thông tin khách hàng</h6>
             <p className="mb-1">
-              {user.name} <br />
-              <a href={`mailto:${user.email}`}>{user.email}</a>
+              {user?.name} <br />
+              <a href={`mailto:${user?.email}`}>{user?.email}</a>
             </p>
           </div>
         </article>
@@ -25,7 +25,7 @@ const OrderDetailInfo = (props) => {
           </span>
           <div className="text">
             <h6 className="mb-1">Thông tin đơn hàng</h6>
-            <p className="mb-1">Pay method: {paymentMethod}</p>
+            <p className="mb-1">Phương thức thanh toán: {paymentMethod}</p>
           </div>
         </article>
       </div>
@@ -37,10 +37,7 @@ const OrderDetailInfo = (props) => {
           <div className="text">
             <h6 className="mb-1">Vận chuyển đến</h6>
             <p className="mb-1">
-              Address: {shippingAddress.address}
-              <br />
-              {shippingAddress.city}
-              <br /> {shippingAddress.country}
+              Địa chỉ: {shippingAddress}
             </p>
           </div>
         </article>

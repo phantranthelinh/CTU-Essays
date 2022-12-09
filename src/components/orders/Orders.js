@@ -29,21 +29,21 @@ const Orders = (props) => {
               <td style={{ color: "red" }}>
                 {Intl.NumberFormat("VN", {
                   maximumSignificantDigits: 3,
-                }).format(order.totalPrice)}{" "}
+                }).format(order?.orderDetails?.totalPrice)}{" "}
                 VNĐ
               </td>
               <td>
                 <span className="badge rounded-pill alert-success">
-                  {moment(order.createdAt).format("llll")}
+                  {moment(order.createdAt).format("HH:mm:ss DD/MM/YYYY")}
                 </span>
               </td>
 
               <td>
                 <span
                   className={`badge btn-${
-                    order.isDelivered ? "success" : "danger"
+                    order?.orderDetails?.isDelivered ? "success" : "danger"
                   }`}
-                >{`${order.isDelivered ? "Delivered" : "Not Delivered"}`}</span>
+                >{`${order?.orderDetails?.isDelivered ? "Delivered" : "Not Delivered"}`}</span>
               </td>
               <td className="d-flex justify-content-end align-item-center">
                 <Link to={`/order/${order._id}`} className="text-success">

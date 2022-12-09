@@ -27,12 +27,12 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `/api/users/login`,
+      `/api/staffs/login`,
       { email, password },
       config
     );
-    if (!data.isAdmin === true) {
-      toast.error("You are not Admin", ToastObjects);
+    if (!data) {
+      toast.error("Lỗi", ToastObjects);
       dispatch({ type: USER_LOGIN_FAIL });
     } else {
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });

@@ -49,12 +49,12 @@ const OrderDetailmain = (props) => {
                   <span>
                     <i className="far fa-calendar-alt mx-2"></i>
                     <b className="text-white">
-                      {moment(order.createdAt).format("llll")}
+                      Đặt hàng vào lúc {moment(order?.createdAt).format("HH:mm:ss DD/MM/YYYY")}
                     </b>
                   </span>
                   <br />
                   <small className="text-white mx-3 ">
-                    Mã đơn hàng: {order?._id}
+                    Mã đơn hàng: {"greenstore"+"-"+order?._id.substring(0,4)}
                   </small>
                 </div>
                 <div className="col-lg-6 col-md-6 ms-auto d-flex justify-content-end align-items-center">
@@ -62,7 +62,7 @@ const OrderDetailmain = (props) => {
                     className="form-select d-inline-block"
                     style={{ maxWidth: "200px" }}
                   >
-                    <option>Change status</option>
+                    <option>Chuyển trạng thái</option>
                     <option>Đang vận chuyển</option>
                     <option>Đã nhận hàng</option>
                   </select>
@@ -76,17 +76,17 @@ const OrderDetailmain = (props) => {
               {/* Order info */}
               <OrderDetailInfo
                 user={order?.user}
-                paymentMethod={order?.paymentMethod}
-                shippingAddress={order?.shippingAddress}
+                paymentMethod={order?.orderDetails?.paymentMethod}
+                shippingAddress={order?.orderDetails?.shippingAddress}
               />
 
               <div className="row">
                 <div className="col-lg-9">
                   <div className="table-responsive">
                     <OrderDetailProducts
-                      orderItems={order.orderItems}
-                      totalPrice={order.totalPrice}
-                      shippingPrice={order.shippingPrice}
+                      orderItems={order?.orderDetails?.orderItems}
+                      totalPrice={order?.orderDetails?.totalPrice}
+                      shippingPrice={order?.orderDetails?.shippingPrice}
                     />
                   </div>
                 </div>
@@ -96,7 +96,7 @@ const OrderDetailmain = (props) => {
                     {order.isDelivered ? (
                       <button className="btn btn-success col-12">
                         Vận chuyển vào ({" "}
-                        {moment(order.deliveredAt).format("DD/MM/YYYY")})
+                        {moment(order?.deliveredAt).format("DD/MM/YYYY")})
                       </button>
                     ) : (
                       <>

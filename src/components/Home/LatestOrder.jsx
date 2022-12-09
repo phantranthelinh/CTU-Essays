@@ -7,7 +7,7 @@ const LatestOrder = (props) => {
   const { loading, error, orders } = props;
   return (
     <div className="card-body">
-      <h5 className="card-title">Latest orders</h5>
+      <h5 className="card-title">Đơn hàng mới</h5>
       {loading ? (
         <Loading />
       ) : error ? (
@@ -27,10 +27,10 @@ const LatestOrder = (props) => {
                       <td>
                         {Intl.NumberFormat("VN", {
                           maximumSignificantDigits: 3,
-                        }).format(order.totalPrice)}{" "}
+                        }).format(order.orderDetails.totalPrice)}{" "}
                         VNĐ
                       </td>
-                      <td>{moment(order.createdAt).format("llll")}</td>
+                      <td>{moment(order.createdAt).format("HH:mm:ss DD/MM/YYYY")}</td>
                       <td>
                         <span
                           className={`badge rounded-pill btn-${

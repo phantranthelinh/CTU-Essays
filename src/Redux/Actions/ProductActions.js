@@ -17,7 +17,7 @@ import {
   PRODUCT_UPDATE_SUCCESS,
 } from "./../Constants/ProductConstants";
 import { logout } from "./UserActions";
-
+import {URL} from "../Url"
 //PRODUCT LIST
 export const listProduct = () => async (dispatch, getState) => {
   try {
@@ -30,7 +30,7 @@ export const listProduct = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/products/`, config);
+    const { data } = await axios.get(`${URL}/api/products/admin`, config);
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
