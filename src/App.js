@@ -22,6 +22,8 @@ import StaffScreen from "./screens/StaffScreen";
 import StaffEditScreen from "./screens/StaffEditScreen";
 import StaffTypeEditScreen from "./screens/StaffTypeEditScreen";
 import AddStaff from "./screens/AddStaff";
+import ManagerRouter from "./ManagerRouter";
+import AdminRouter from "./AdminRouter";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,14 +42,14 @@ function App() {
       <Router>
         <Switch>
           <PrivateRouter exact path="/" component={HomeScreen} />
-          <PrivateRouter exact path="/products" component={ProductScreen} />
+          <ManagerRouter exact path="/products" component={ProductScreen} />
           <PrivateRouter exact path="/orders" component={OrderScreen} />
           <PrivateRouter
             exact
             path="/order/:id"
             component={OrderDetailScreen}
           />
-          <PrivateRouter exact path="/add-product" component={AddProduct} />
+          <ManagerRouter exact path="/add-product" component={AddProduct} />
           <PrivateRouter
             exact
             path="/add-staff-type"
@@ -56,25 +58,21 @@ function App() {
 
           <PrivateRouter exact path="/add-staff" component={AddStaff} />
 
-          <PrivateRouter exact path="/customers" component={UsersScreen} />
-          <PrivateRouter exact path="/staffs" component={StaffScreen} />
-          <PrivateRouter
-            exact
-            path="/staff-types"
-            component={StaffTypeScreen}
-          />
+          <ManagerRouter exact path="/customers" component={UsersScreen} />
+          <AdminRouter exact path="/staffs" component={StaffScreen} />
+          <AdminRouter exact path="/staff-types" component={StaffTypeScreen} />
 
-          <PrivateRouter
+          <ManagerRouter
             exact
             path="/product/:id/edit"
             component={ProductEditScreen}
           />
-          <PrivateRouter
+          <ManagerRouter
             exact
             path="/staff-types/:id"
             component={StaffTypeEditScreen}
           />
-          <PrivateRouter exact path="/staffs/:id" component={StaffEditScreen} />
+          <ManagerRouter exact path="/staffs/:id" component={StaffEditScreen} />
 
           <Route exact path="/login" component={Login} />
           <Route path="*" component={NotFound} />
