@@ -60,7 +60,8 @@ const EditProductMain = (props) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      toast.success("Product updated", ToastObjects);
+      toast.success("Cập nhật thành công", ToastObjects);
+      dispatch(editProduct(productId));
     }
 
     if (!product?.name || product._id !== productId) {
