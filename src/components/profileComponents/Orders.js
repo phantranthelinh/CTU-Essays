@@ -41,7 +41,7 @@ const Orders = (props) => {
                     return (
                       <tr key={index}
                         className={`${
-                          order.isPaid ? "alert-success" : "alert-danger"
+                          order.orderDetails.isPaid ? "alert-success" : "alert-danger"
                         }`}
                       >
                         <td>
@@ -50,7 +50,7 @@ const Orders = (props) => {
                           </a>
                         </td>
                         <td>
-                          {order?.orderDetails.isPaid ? "Đã hoàn thành đặt hàng" : "chưa hoàn thành đặt hàng"}
+                          {order?.orderDetails.isPaid ? "Đã hoàn tất đặt hàng" : "Chưa hoàn tất đặt hàng"}
                         </td>
                         <td>
                           {order.isPaid

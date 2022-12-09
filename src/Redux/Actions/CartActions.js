@@ -9,7 +9,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_UPDATE_PROFILE_SUCCESS,
 } from "../Constants/UserContstants";
-
+import {URL} from "../Url"
 //ADD TO CART
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -51,7 +51,7 @@ export const saveShippingAddress =
       },
     };
     const { data } = await axios.put(
-      `/api/customers/${userInfo._id}`,
+      `${URL}/api/customers/${userInfo._id}`,
       { address },
       config
     );

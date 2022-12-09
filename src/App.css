@@ -869,3 +869,9 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#004ec2", en
 .not-me{
   opacity: 0.6;
 }
+.shoptext p {
+  max-width: 300;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
