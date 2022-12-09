@@ -15,7 +15,6 @@ module.exports = {
       totalPrice,
     } = req.body;
 
-
     if (orderItems && orderItems.length === 0) {
       res.status(400);
       throw new Error("Không có sản phẩm trong đơn đặt hàng");
@@ -27,24 +26,29 @@ module.exports = {
         paymentMethod,
         shippingPrice,
         totalPrice,
-      })
-      const savedOrderDetail = await newOrderDetail.save()
+      });
+      const savedOrderDetail = await newOrderDetail.save();
       const newOrder = new Order({
         user: req.user._id,
-        orderDetails: savedOrderDetail._id
+        orderDetails: savedOrderDetail._id,
       });
-       await newOrder.save();
+      const savedOrder = await newOrder.save();
 
-    
-      res.status(200).json({message:"Đặt hàng thành công"});
+      res
+        .status(200)
+        .json({
+          message: "Đặt hàng thành công",
+          _id: savedOrder._id,
+          user: savedOrder.user,
+          orderDetails: savedOrder.orderDetails,
+        });
     }
   }),
   //ORDER DETAILS
   detail: asyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id).populate(
-      "user",
-      "name email"
-    ).populate({path: "orderDetails"});
+    const order = await Order.findById(req.params.id)
+      .populate("user", "name email")
+      .populate({ path: "orderDetails" });
 
     if (order) {
       res.status(200).json(order);
@@ -57,10 +61,10 @@ module.exports = {
   adminGetAllOrder: asyncHandler(async (req, res) => {
     const orders = await Order.find({})
       .sort({ _id: -1 })
-      .populate("user", "id name email").populate({path: "orderDetails"});
+      .populate("user", "id name email")
+      .populate({ path: "orderDetails" });
     res.json(orders);
   }),
-
 
   deleteAllOrder: asyncHandler(async (req, res) => {
     await Order.deleteMany({});
@@ -68,16 +72,17 @@ module.exports = {
   }),
   isDelivered: asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
-    if (order) {
-      order.isDelivered = true;
-      order.deliveredAt = Date.now();
+    const orderDetail = await OrderDetail.findById(order.orderDetails)
 
-      const updateOrder = await order.save();
-      res.json(updateOrder);
+    if (order) {
+      orderDetail.isDelivered = true;
+      orderDetail.deliveredAt = Date.now();
+
+     await orderDetail.save();
+      res.json({message: "Cập nhật thành công", orderDetail});
     } else {
-      res.status(404);
+      res.status(400);
       throw new Error("Không tìm thấy đơn đặt hàng");
     }
   }),
 };
-
