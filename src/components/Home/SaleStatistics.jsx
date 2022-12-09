@@ -1,20 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/iframe-has-title */
 
+import {
+  BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale,
+  PointElement, Title,
+  Tooltip
+} from "chart.js";
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
 import { listOrder } from "../../Redux/Actions/OrderActions";
+import { listProduct } from './../../Redux/Actions/ProductActions';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -67,6 +63,7 @@ const ProductsStatistics = () => {
   };
 
   const labels = [
+    "Một",
     "Hai",
     "Ba",
     "Bốn",
@@ -78,14 +75,15 @@ const ProductsStatistics = () => {
     "Mười",
     "M.Một",
     "M.Hai",
-    "Một",
   ];
   const dispatch = useDispatch();
   const orderList = useSelector((state) => state.orderList);
   const { orders } = orderList;
   const [data, setData] = useState([]);
+
   useEffect(() => {
     dispatch(listOrder());
+    dispatch(listProduct())
   }, [dispatch]);
 
   useEffect(() => {
@@ -97,12 +95,12 @@ const ProductsStatistics = () => {
             ?.reduce((a, b) => {
               return a + b.orderDetails.totalPrice;
             }, 0) || 0;
-        console.log(revenue);
         setData((prev) => [...prev, revenue]);
       }
     };
     revenueByMonths();
-  }, [orders?.length]);
+  }, [orders]);
+
   const chartData = {
     labels: labels,
     datasets: [
@@ -110,7 +108,7 @@ const ProductsStatistics = () => {
         label: "Doanh thu",
         data: data,
       },
-    ],
+    ],  
   };
 
   return (

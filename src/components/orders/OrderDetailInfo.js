@@ -1,7 +1,7 @@
 import React from "react";
 
 const OrderDetailInfo = (props) => {
-  const { user, shippingAddress, paymentMethod } = props;
+  const { user, shippingAddress, paymentMethod,isPaid } = props;
   return (
     <div className="row mb-5 order-info-wrap">
       <div className="col-md-6 col-lg-4">
@@ -26,6 +26,7 @@ const OrderDetailInfo = (props) => {
           <div className="text">
             <h6 className="mb-1">Thông tin đơn hàng</h6>
             <p className="mb-1">Phương thức thanh toán: {paymentMethod}</p>
+            <span className={`badge ${isPaid ? "bg-success": "bg-info"}`}>{isPaid ? "Đã thanh toán" : "Chưa thanh toán"}</span>
           </div>
         </article>
       </div>

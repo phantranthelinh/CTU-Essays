@@ -12,9 +12,9 @@ const Orders = (props) => {
           <th scope="col">Địa chỉ email</th>
           <th scope="col">Tổng giá</th>
           <th scope="col">Ngày đặt hàng</th>
-          <th>Hình thức thanh toán</th>
-          <th>Trạng thái thanh toán</th>
-          <th>Trạng thái vận chuyển</th>
+          <th scope="col">Hình thức thanh toán</th>
+          <th scope="col">Thanh toán</th>
+          <th scope="col">Vận chuyển</th>
 
           <th scope="col" className="text-end">
             Thao tác
@@ -41,23 +41,31 @@ const Orders = (props) => {
                 </span>
               </td>
               <td>
-                <span
-                  className={`badge btn-info`}
-                >{order?.orderDetails?.paymentMethod}</span>
+                <span className={`badge btn-info`}>
+                  {order?.orderDetails?.paymentMethod}
+                </span>
               </td>
               <td>
                 <span
                   className={`badge btn-${
                     order?.orderDetails?.isPaid ? "success" : "secondary"
                   }`}
-                >{`${order?.orderDetails?.isPaid ? "Đã thanh toán" : "Chưa thanh toán"}`}</span>
+                >{`${
+                  order?.orderDetails?.isPaid
+                    ? "Đã thanh toán"
+                    : "Chưa thanh toán"
+                }`}</span>
               </td>
               <td>
                 <span
                   className={`badge btn-${
                     order?.orderDetails?.isDelivered ? "success" : "secondary"
                   }`}
-                >{`${order?.orderDetails?.isDelivered ? "Đang vận chuyển" : "Chưa vận chuyển"}`}</span>
+                >{`${
+                  order?.orderDetails?.isDelivered
+                    ? "Đang vận chuyển"
+                    : "Chưa vận chuyển"
+                }`}</span>
               </td>
               <td className="d-flex justify-content-end align-item-center">
                 <Link to={`/order/${order._id}`} className="text-success">

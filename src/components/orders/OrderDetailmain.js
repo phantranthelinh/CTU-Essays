@@ -1,15 +1,15 @@
+import moment from "moment";
 import React, { useEffect } from "react";
-import OrderDetailProducts from "./OrderDetailProducts";
-import OrderDetailInfo from "./OrderDetailInfo";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   deliveredOrder,
-  getOrderDetails,
+  getOrderDetails
 } from "../../Redux/Actions/OrderActions";
-import Loading from "./../LoadingError/Loading";
 import Message from "./../LoadingError/Error";
-import moment from "moment";
+import Loading from "./../LoadingError/Loading";
+import OrderDetailInfo from "./OrderDetailInfo";
+import OrderDetailProducts from "./OrderDetailProducts";
 const OrderDetailmain = (props) => {
   const { orderId } = props;
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const OrderDetailmain = (props) => {
                   </span>
                   <br />
                   <small className="text-white mx-3 ">
-                    Mã đơn hàng: {"greenstore"+"-"+order?._id.substring(0,4)}
+                    Mã đơn hàng: {`greenstore-${order?._id.substring(0,4)}`}
                   </small>
                 </div>
             
@@ -65,6 +65,8 @@ const OrderDetailmain = (props) => {
               <OrderDetailInfo
                 user={order?.user}
                 paymentMethod={order?.orderDetails?.paymentMethod}
+                isPaid={order?.orderDetails?.isPaid}
+
                 shippingAddress={order?.orderDetails?.shippingAddress}
               />
 

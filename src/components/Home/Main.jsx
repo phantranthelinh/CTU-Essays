@@ -6,6 +6,7 @@ import SaleStatistics from "./SaleStatistics";
 import { useSelector } from "react-redux";
 import { listOrder } from "../../Redux/Actions/OrderActions";
 import { useDispatch } from "react-redux";
+import { listProduct } from "../../Redux/Actions/ProductActions";
 
 const Main = () => {
   const orderList = useSelector((state) => state.orderList);
@@ -16,6 +17,8 @@ const Main = () => {
   const { products } = productList;
   useEffect(() => {
     dispatch(listOrder());
+    dispatch(listProduct());
+
   }, [dispatch]);
   return (
     <>

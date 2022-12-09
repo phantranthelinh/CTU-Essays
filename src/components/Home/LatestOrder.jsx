@@ -15,7 +15,21 @@ const LatestOrder = (props) => {
       ) : (
         <>
           <div className="table-responsive">
-            <table className="table">
+            <table className="table mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Tên khách hàng</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Tổng tiền</th>
+                  <th scope="col">Đặt hàng vào lúc</th>
+                  <th scope="col">Thanh toán</th>
+                  <th scope="col">Vận chuyển</th>
+                  <th scope="col">Thao tác</th>
+
+
+                </tr>
+              </thead>
+
               <tbody>
                 {orders.slice(0, 5).map((order) => {
                   return (
@@ -30,14 +44,25 @@ const LatestOrder = (props) => {
                         }).format(order.orderDetails.totalPrice)}{" "}
                         VNĐ
                       </td>
-                      <td>{moment(order.createdAt).format("HH:mm:ss DD/MM/YYYY")}</td>
+                      <td>
+                        {moment(order.createdAt).format("HH:mm:ss DD/MM/YYYY")}
+                      </td>
                       <td>
                         <span
                           className={`badge rounded-pill btn-${
-                            order.isDelivered ? "success" : "danger"
+                            order?.orderDetails?.isPaid ? "success" : "danger"
                           }`}
                         >
-                          {order.isDelivered ? "Delivered" : "Not delivered"}
+                          {order?.orderDetails?.isPaid ? "Đã thanh toán" : "Chưa thanh toán"}
+                        </span>
+                      </td>
+                      <td>
+                        <span
+                          className={`badge rounded-pill btn-${
+                            order.orderDetails?.isDelivered ? "success" : "danger"
+                          }`}
+                        >
+                          {order.orderDetails?.isDelivered ? "Đang vận chuyển" : "Chưa vận chuyển"}
                         </span>
                       </td>
 

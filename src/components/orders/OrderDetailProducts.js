@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const OrderDetailProducts = (props) => {
-  const { orderItems, shippingPrice, totalPrice } = props;
+  const { orderItems, shippingPrice, totalPrice} = props;
 
   const subtotal = orderItems?.reduce(
     (acc, item) => acc + item?.price * item?.qty,
