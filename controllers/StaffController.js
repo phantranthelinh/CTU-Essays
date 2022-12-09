@@ -1,5 +1,6 @@
 const Staff = require("../models/StaffModel");
 const asyncHandler = require("express-async-handler");
+const generateToken = require("../utils/generateToken");
 module.exports = {
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -9,6 +10,7 @@ module.exports = {
         _id: staff._id,
         name: staff.name,
         email: staff.email,
+        token: generateToken(staff._id),
         staffType: staff.staffType,
       });
     } else {

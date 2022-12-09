@@ -85,12 +85,16 @@ module.exports = {
       user.email = req.body.email || user.email;
       user.phone = req.body.phone || user.phone;
       if (req.body.address) {
-        const newAddress = new Address({
-          userId: user._id,
+        const addressFindOut = await Address.findOne({
           address: req.body.address,
         });
-        const savedAddress = await newAddress.save();
-        if (!user.address.find((item) => item._id === savedAddress._id)) {
+        if (!addressFindOut) {
+          const newAddress = new Address({
+            userId: user._id,
+            address: req.body.address,
+          });
+          await newAddress.save();
+
           user.address.push(savedAddress._id);
         }
       }

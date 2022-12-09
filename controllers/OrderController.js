@@ -57,7 +57,7 @@ module.exports = {
   adminGetAllOrder: asyncHandler(async (req, res) => {
     const orders = await Order.find({})
       .sort({ _id: -1 })
-      .populate("user", "id name email");
+      .populate("user", "id name email").populate({path: "orderDetails"});
     res.json(orders);
   }),
 

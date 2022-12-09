@@ -2,12 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 const orderController = require("../controllers/OrderController");
-const { protect, admin } = require("../middleware/AuthMiddleware");
+const { protect } = require("../middleware/AuthMiddleware");
 
 router.post("/", protect, orderController.create);
-router.get("/all", protect, admin, orderController.adminGetAllOrder);
+router.get("/", protect,  orderController.adminGetAllOrder);
 router.get("/:id", protect, orderController.detail);
 router.put("/:id/delivered", protect, orderController.isDelivered);
-router.delete("/", protect, admin, orderController.deleteAllOrder);
+router.delete("/", protect,  orderController.deleteAllOrder);
 
 module.exports = router;

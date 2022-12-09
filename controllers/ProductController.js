@@ -79,7 +79,6 @@ module.exports = {
         const createdImportProduct = await importProduct.save();
 
         const imageProduct = new ImageProduct({
-          productId: createdImportProduct._id,
           base64: image,
         });
         const createdImageProduct = await imageProduct.save();
@@ -99,7 +98,10 @@ module.exports = {
             image: createdImageProduct._id,
             importProductDetail: importProductDetail._id,
           });
-          await product.save();
+         const savedProduct = await product.save();
+         createdImageProduct.productId = savedProduct._id;
+         createdImageProduct.save()
+
           res.status(200).json({ message: "Thêm sản phẩm thành công!" });
         } else {
           res.status(400);
@@ -114,7 +116,7 @@ module.exports = {
     const product = await Product.findById(req.params.id);
 
     if (product) {
-      const imageProduct = await ImageProduct.findById(product.image);
+      const imageProduct = await ImageProduct.findOne({productId: product._id});
       const importProductDetail = await ImportProductDetail.findById(
         product.importProductDetail
       );
@@ -122,10 +124,11 @@ module.exports = {
         product.name = name || product.name;
         product.price = salePrice || product.price;
         product.description = description || product.description;
+        importProductDetail.countInStock =
+        countInStock || importProductDetail.countInStock;
         importProductDetail.importPrice =
           importPrice || importProductDetail.importPrice;
         imageProduct.base64 = image || imageProduct.base64;
-
         await imageProduct.save();
         await product.save();
         await importProductDetail.save();
@@ -214,7 +217,7 @@ module.exports = {
   getAllByAdmin: asyncHandler(async (req, res) => {
     const products = await Product.find({})
       .sort({ _id: -1 })
-      .populate({ path: "image", select: "base64" });
+      .populate({ path: "image", select: "base64" }).populate({path: "importProductDetail"});
     res.json(products);
   }),
 };

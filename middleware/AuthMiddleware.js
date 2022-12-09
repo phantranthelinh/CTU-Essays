@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 
 const User = require("../models/UserModel");
+const Staff = require("../models/StaffModel");
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -14,7 +15,13 @@ const protect = asyncHandler(async (req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.id).select("-password");
+      const user = await User.findById(decoded.id).select("-password");
+      const staff =  await Staff.findById(decoded.id).select("-password")
+      if(user) {
+        req.user = user
+      }else {
+        req.user = staff
+      }
       next();
     } catch (err) {
       console.error(err);
