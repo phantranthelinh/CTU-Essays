@@ -125,7 +125,7 @@ module.exports = {
   getOrders: asyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.params.id })
       .populate({ path: "user", select: "name email" })
-      .populate({ path: "orderDetails" });
+      .populate({ path: "orderDetails" }).sort({createdAt: -1});
     res.status(200).json(orders);
   }),
 };

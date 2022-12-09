@@ -27,21 +27,22 @@ module.exports = {
         shippingPrice,
         totalPrice,
       });
+      if (paymentMethod==="paypal") {
+        newOrderDetail.isPaid = true;
+      }
       const savedOrderDetail = await newOrderDetail.save();
       const newOrder = new Order({
         user: req.user._id,
         orderDetails: savedOrderDetail._id,
       });
       const savedOrder = await newOrder.save();
-
-      res
-        .status(200)
-        .json({
-          message: "Đặt hàng thành công",
-          _id: savedOrder._id,
-          user: savedOrder.user,
-          orderDetails: savedOrder.orderDetails,
-        });
+      
+      res.status(200).json({
+        message: "Đặt hàng thành công",
+        _id: savedOrder._id,
+        user: savedOrder.user,
+        orderDetails: savedOrder.orderDetails,
+      });
     }
   }),
   //ORDER DETAILS
@@ -72,14 +73,14 @@ module.exports = {
   }),
   isDelivered: asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
-    const orderDetail = await OrderDetail.findById(order.orderDetails)
+    const orderDetail = await OrderDetail.findById(order.orderDetails);
 
     if (order) {
       orderDetail.isDelivered = true;
       orderDetail.deliveredAt = Date.now();
 
-     await orderDetail.save();
-      res.json({message: "Cập nhật thành công", orderDetail});
+      await orderDetail.save();
+      res.json({ message: "Cập nhật thành công", orderDetail });
     } else {
       res.status(400);
       throw new Error("Không tìm thấy đơn đặt hàng");
