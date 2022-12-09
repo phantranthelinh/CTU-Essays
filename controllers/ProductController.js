@@ -142,15 +142,30 @@ module.exports = {
   addReview: asyncHandler(async (req, res) => {
     const { rating, comment } = req.body;
     const product = await Product.findById(req.params.id);
-
     if (product) {
       const newReview = new ReviewProduct({
         userId: req.user._id,
         comment: comment,
         rating: Number(rating),
-        productId: req.params.id,
+        productId: product._id,
       });
-      newReview.save();
+      await newReview.save();
+      const reviews = await ReviewProduct.find({ productId: product._id });
+      let totalNumReviews = 0;
+      let totalRating = 0;
+
+      for (let i = 0; i < reviews.length; i++) {
+        //TODO: Calculate numReviews
+        totalNumReviews++;
+        //TODO: calculate rating
+        totalRating += reviews[i].rating;
+      }
+      product.numReviews = totalNumReviews;
+      if (totalRating === 0) {
+        product.rating = 0;
+      }
+      product.rating = Number(totalRating / reviews.length).toFixed(2);
+      await product.save();
 
       res.status(200).json({ Message: "Đánh giá sản phẩm thành công" });
     } else {
@@ -168,12 +183,32 @@ module.exports = {
     }
   }),
   deleteReview: asyncHandler(async (req, res) => {
-    const review = ReviewProduct.findById(req.params.id);
-    if(review){
-      await review.remove();
-      res.status(200).json({message: "Xóa thành công"})
-    }else{
-      res.status(404).json({message: "Không tìm thấy đánh giá"})
+    const review = await ReviewProduct.findById(req.params.id);
+    if (review) {
+      const reviews = await ReviewProduct.find({ productId: review.productId });
+      //TODO: delele all review
+      // await ReviewProduct.remove({})
+      const product = await Product.findById(review.productId);
+
+      await review.deleteOne();
+
+      let totalNumReviews = 0;
+      let totalRating = 0;
+      for (let i = 0; i < reviews.length; i++) {
+        //TODO: Calculate numReviews
+        totalNumReviews++;
+        //TODO: calculate rating
+        totalRating += reviews[i].rating;
+      }
+      product.numReviews = totalNumReviews;
+      if (totalRating === 0) {
+        product.rating = 0;
+      }
+      product.rating = Number(totalRating / reviews.length).toFixed(2);
+      await product.save();
+      res.status(200).json({ message: "Xóa thành công" });
+    } else {
+      res.status(404).json({ message: "Không tìm thấy đánh giá" });
     }
   }),
   getAllByAdmin: asyncHandler(async (req, res) => {
@@ -182,5 +217,4 @@ module.exports = {
       .populate({ path: "image", select: "base64" });
     res.json(products);
   }),
- 
 };

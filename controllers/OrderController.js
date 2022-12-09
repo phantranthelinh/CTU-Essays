@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
 const Order = require("../models/OrderModel");
+const OrderDetail = require("../models/OrderDetailModel");
+
 const asyncHandler = require("express-async-handler");
 
 module.exports = {
@@ -10,30 +11,32 @@ module.exports = {
       shippingAddress,
       paymentMethod,
       itemsPrice,
-      taxPrice,
       shippingPrice,
       totalPrice,
     } = req.body;
 
+
     if (orderItems && orderItems.length === 0) {
       res.status(400);
-      throw new Error("No order items");
-      return;
+      throw new Error("Không có sản phẩm trong đơn đặt hàng");
     } else {
-      const newOrder = new Order({
+      const newOrderDetail = new OrderDetail({
         orderItems,
-        user: req.user._id,
         shippingAddress,
-        paymentMethod,
         itemsPrice,
-        taxPrice,
-
+        paymentMethod,
         shippingPrice,
         totalPrice,
+      })
+      const savedOrderDetail = await newOrderDetail.save()
+      const newOrder = new Order({
+        user: req.user._id,
+        orderDetails: savedOrderDetail._id
       });
+       await newOrder.save();
 
-      const savedOrder = await newOrder.save();
-      res.status(201).json(savedOrder);
+    
+      res.status(200).json({message:"Đặt hàng thành công"});
     }
   }),
   //ORDER DETAILS
@@ -41,7 +44,8 @@ module.exports = {
     const order = await Order.findById(req.params.id).populate(
       "user",
       "name email"
-    );
+    ).populate({path: "orderDetails"});
+
     if (order) {
       res.status(200).json(order);
     } else {
@@ -57,10 +61,6 @@ module.exports = {
     res.json(orders);
   }),
 
-  userOrders: asyncHandler(async (req, res) => {
-    const orders = await Order.find({ user: req.user._id }).sort({ _id: -1 });
-    res.json(orders);
-  }),
 
   deleteAllOrder: asyncHandler(async (req, res) => {
     await Order.deleteMany({});

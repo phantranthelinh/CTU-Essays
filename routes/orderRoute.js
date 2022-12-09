@@ -8,9 +8,6 @@ router.post("/", protect, orderController.create);
 router.get("/all", protect, admin, orderController.adminGetAllOrder);
 router.get("/:id", protect, orderController.detail);
 router.put("/:id/delivered", protect, orderController.isDelivered);
-
-router.get("/", protect, orderController.userOrders);
-
 router.delete("/", protect, admin, orderController.deleteAllOrder);
 
 module.exports = router;

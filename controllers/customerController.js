@@ -1,18 +1,22 @@
 const User = require("../models/UserModel");
+const Order = require("../models/OrderModel");
 const Address = require("../models/AddressModel");
 const asyncHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
-module.exports =  {
+module.exports = {
   login: asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate({
+      path: "address",
+      select: "address",
+    });
     if (user && (await user.matchPassword(password))) {
       res.json({
         _id: user._id,
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        address: user.address,
+        addresses: user.address,
         phone: user.phone,
         token: generateToken(user._id),
         createAt: user.createdAt,
@@ -23,7 +27,7 @@ module.exports =  {
     }
   }),
   register: asyncHandler(async (req, res) => {
-    const { name, email, password, phone, address } = req.body;
+    const { name, email, password } = req.body;
     const userExist = await User.findOne({ email });
     if (userExist) {
       res.status(400);
@@ -33,14 +37,8 @@ module.exports =  {
       name,
       email,
       password,
-      phone,
     });
     await user.save();
-    const addressCreated = new Address({
-      userId: user._id,
-      address: address
-    })
-    const addressSaved= await addressCreated.save()
     if (user) {
       res.status(200).json({
         _id: user._id,
@@ -49,7 +47,6 @@ module.exports =  {
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
         createAt: user.createdAt,
-        address: addressSaved.address
       });
     } else {
       res.status(400);
@@ -57,16 +54,19 @@ module.exports =  {
     }
   }),
   get: asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id).populate({path: "address" , select: "address"});
+    const user = await User.findById(req.params.id).populate({
+      path: "address",
+      select: "address",
+    });
     if (user) {
       res.json({
         _id: user._id,
         name: user.name,
         email: user.email,
         phone: user.phone,
-        address: user.address,
         isAdmin: user.isAdmin,
         createAt: user.createdAt,
+        addresses: user.address,
       });
     } else {
       res.status(404);
@@ -76,14 +76,25 @@ module.exports =  {
 
   //UPDATE PROFILE
   update: asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user._id).populate({
+      path: "address",
+      select: "address",
+    });
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
       user.phone = req.body.phone || user.phone;
-      if(req.body.address){
-        user.address.push(req.body.address)
+      if (req.body.address) {
+        const newAddress = new Address({
+          userId: user._id,
+          address: req.body.address,
+        });
+        const savedAddress = await newAddress.save();
+        if (!user.address.find((item) => item._id === savedAddress._id)) {
+          user.address.push(savedAddress._id);
+        }
       }
+
       if (req.body.password) {
         user.password = req.body.password;
       }
@@ -93,7 +104,7 @@ module.exports =  {
         name: updatedUser.name,
         email: updatedUser.email,
         phone: updatedUser.phone,
-        address: updatedUser.address,
+        addresses: updatedUser.address,
         isAdmin: updatedUser.isAdmin,
         createAt: updatedUser.createdAt,
         token: generateToken(updatedUser._id),
@@ -107,5 +118,10 @@ module.exports =  {
     const users = await User.find();
     res.json(users);
   }),
+  getOrders: asyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.params.id })
+      .populate({ path: "user", select: "name email" })
+      .populate({ path: "orderDetails" });
+    res.status(200).json(orders);
+  }),
 };
-

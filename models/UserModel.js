@@ -16,10 +16,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
+    address: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Address"
-    },
+    }],
     phone:{
       type: Number, 
     },

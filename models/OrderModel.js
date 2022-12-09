@@ -6,28 +6,10 @@ const orderSchema = mongoose.Schema(
       required: true,
       ref: "User",
     },
-    paymentMethod: {
-      type: String,
-      default: "Trực tiếp"
-    },
-    shippingPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
-    totalPrice: {
-      type: Number,
-      required: true,
-      default: 0.0,
-    },
-    isDelivered: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    deliveredAt: {
-      type: Date,
-    },
+    orderDetails:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "OrderDetail", 
+    }
   },
   {
     timestamps: true,
