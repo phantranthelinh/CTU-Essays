@@ -3,16 +3,17 @@ import Orders from "./Orders";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./../LoadingError/Loading";
 import Message from "./../LoadingError/Error";
-import { listOrder } from './../../Redux/Actions/OrderActions';
+import { listOrder } from "./../../Redux/Actions/OrderActions";
 
 const OrderMain = (props) => {
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(() =>{
-    dispatch(listOrder())
-  }, [dispatch ])
+  useEffect(() => {
+    dispatch(listOrder());
+  }, [dispatch]);
+  console.log(orders);
   return (
     <section className="content-main">
       <div className="content-header">
@@ -20,7 +21,6 @@ const OrderMain = (props) => {
       </div>
 
       <div className="card mb-4 shadow-sm">
-   
         <div className="card-body">
           <div className="table-responsive">
             {loading ? (
