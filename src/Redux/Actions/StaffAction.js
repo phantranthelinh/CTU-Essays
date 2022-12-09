@@ -17,7 +17,7 @@ import {
   STAFF_UPDATE_SUCCESS,
 } from "./../Constants/StaffConstants";
 import { logout } from "./UserActions";
-
+import {URL} from "../Url"
 //STAFF LIST
 export const listStaff = () => async (dispatch, getState) => {
   try {
@@ -30,7 +30,7 @@ export const listStaff = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/staffs/`, config);
+    const { data } = await axios.get(`${URL}/api/staffs/`, config);
     dispatch({ type: STAFF_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -59,7 +59,7 @@ export const deleteStaff = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.delete(`/api/staffs/${id}`, config);
+    const { data } = await axios.delete(`${URL}/api/staffs/${id}`, config);
     dispatch({ type: STAFF_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -90,7 +90,7 @@ export const createStaff =
         },
       };
       const { data } = await axios.post(
-        `/api/staffs/`,
+        `${URL}/api/staffs/`,
         { name, email, password, staffType },
         config
       );
@@ -121,7 +121,7 @@ export const editStaff = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/staffs/${id}`, config);
+    const { data } = await axios.get(`${URL}/api/staffs/${id}`, config);
     dispatch({ type: STAFF_EDIT_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -151,7 +151,7 @@ export const updateStaff = (staff) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.put(
-      `/api/staffs/${staff.id}`,
+      `${URL}/api/staffs/${staff.id}`,
       staff,
       config
     );

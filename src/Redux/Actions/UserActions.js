@@ -10,7 +10,7 @@ import {
   USER_LIST_SUCCESS,
   USER_LIST_RESET,
 } from "../Constants/UserContstants";
-
+import {URL} from "../Url"
 //LOGIN
 export const login = (email, password) => async (dispatch) => {
   const ToastObjects = {
@@ -27,7 +27,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `/api/staffs/login`,
+      `${URL}/api/staffs/login`,
       { email, password },
       config
     );
@@ -76,7 +76,7 @@ export const listUser = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/customers`, config);
+    const { data } = await axios.get(`${URL}/api/customers`, config);
 
     dispatch({ type: USER_LIST_SUCCESS, payload: data });
   } catch (error) {
