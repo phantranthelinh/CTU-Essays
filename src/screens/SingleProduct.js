@@ -161,7 +161,7 @@ const SingleProduct = ({ history, match }) => {
             {reviews?.length === 0 && (
               <Message variant={"alert-info mt-3"}>Không có đánh giá</Message>
             )}
-            {reviews.reviews?.map((review) => {
+            {reviews?.reviews?.map((review) => {
               return (
                 <div
                   key={review?._id}
