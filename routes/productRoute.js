@@ -9,9 +9,9 @@ router.get("/admin", protect, ProductController.getAllByAdmin);
 router.get("/:id", ProductController.getSingle);
 
 router.delete("/:id", protect, ProductController.delete);
-router.patch("/:id", protect, ProductController.edit);
+router.patch("/:id",  ProductController.edit);
 router.post("/:id/review", protect, ProductController.addReview);
-router.get("/:id/review", protect, ProductController.getAllReview);
+router.get("/:id/review",  ProductController.getAllReview);
 router.post("/", protect, ProductController.add);
 
 module.exports = router;
