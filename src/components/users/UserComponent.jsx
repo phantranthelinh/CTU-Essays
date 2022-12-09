@@ -29,26 +29,6 @@ const UserComponent = () => {
       </div>
 
       <div className="card mb-4">
-        <header className="card-header">
-          <div className="row gx-3">
-            <div className="col-lg-4 col-md-6 me-auto">
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                className="form-control"
-              />
-            </div>
-            <div className="col-lg-2 col-6 col-md-3">
-              <select className="form-select">
-                <option>Show 20</option>
-                <option>Show 30</option>
-                <option>Show 40</option>
-                <option>Show all</option>
-              </select>
-            </div>
-          </div>
-        </header>
-
         {/* Card */}
         <div className="card-body">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
@@ -79,27 +59,7 @@ const UserComponent = () => {
               </div>
             ))}
           </div>
-
-          {/* nav */}
-          <nav className="float-end mt-4" aria-label="Page navigation">
-            <ul className="pagination">
-              <li className="page-item disabled">
-                <Link className="page-link" to="#">
-                  Previous
-                </Link>
-              </li>
-              <li className="page-item active">
-                <Link className="page-link" to="#">
-                  1
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link className="page-link" to="#">
-                  Next
-                </Link>
-              </li>
-            </ul>
-          </nav>
+      
         </div>
       </div>
     </section>

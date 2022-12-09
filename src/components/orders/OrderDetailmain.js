@@ -57,19 +57,7 @@ const OrderDetailmain = (props) => {
                     Mã đơn hàng: {"greenstore"+"-"+order?._id.substring(0,4)}
                   </small>
                 </div>
-                <div className="col-lg-6 col-md-6 ms-auto d-flex justify-content-end align-items-center">
-                  <select
-                    className="form-select d-inline-block"
-                    style={{ maxWidth: "200px" }}
-                  >
-                    <option>Chuyển trạng thái</option>
-                    <option>Đang vận chuyển</option>
-                    <option>Đã nhận hàng</option>
-                  </select>
-                  <Link className="btn btn-success ms-2" to="#">
-                    <i className="fas fa-print"></i>
-                  </Link>
-                </div>
+            
               </div>
             </header>
             <div className="card-body">
@@ -93,18 +81,18 @@ const OrderDetailmain = (props) => {
                 {/* Payment Info */}
                 <div className="col-lg-3">
                   <div className="box shadow-sm bg-light">
-                    {order.isDelivered ? (
-                      <button className="btn btn-success col-12">
+                    {order.orderDetails?.isDelivered ? (
+                      <button className="btn btn-secondary col-12">
                         Vận chuyển vào ({" "}
-                        {moment(order?.deliveredAt).format("DD/MM/YYYY")})
+                        {moment(order?.orderDetails.deliveredAt).format("DD/MM/YYYY")})
                       </button>
                     ) : (
                       <>
                         {loadingDelivered && <Loading />}
                         <button
                           onClick={deliveredHandler}
-                          className="btn btn-dark col-12"
-                        >
+                          className="btn btn-primary col-12"
+                        > 
                           Đã vận chuyển
                         </button>
                       </>

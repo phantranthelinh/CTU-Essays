@@ -34,7 +34,7 @@ const MainProducts = () => {
       </div>
 
       <div className="card mb-4 shadow-sm">
-        <header className="card-header bg-white ">
+        {/* <header className="card-header bg-white ">
           <div className="row gx-3 py-3">
             <div className="col-lg-4 col-md-6 me-auto ">
               <input
@@ -44,7 +44,7 @@ const MainProducts = () => {
               />
             </div>
           </div>
-        </header>
+        </header> */}
 
         <div className="card-body">
           {errorDeleteProduct && (
@@ -56,13 +56,13 @@ const MainProducts = () => {
             <Message variant="alert-danger">{error}</Message>
           ) : (
             <div className="row">
-              {data.products?.map((product) => (
+              {data?.map((product) => (
                 <Product product={product} key={product._id} />
               ))}
             </div>
           )}
 
-          <nav className="float-end mt-4" aria-label="Page navigation">
+          {/* <nav className="float-end mt-4" aria-label="Page navigation">
             <ul className="pagination">
               <li className="page-item disabled">
                 <Link className="page-link" to="#">
@@ -90,7 +90,7 @@ const MainProducts = () => {
                 </Link>
               </li>
             </ul>
-          </nav>
+          </nav> */}
         </div>
       </div>
     </section>

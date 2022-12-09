@@ -12,7 +12,10 @@ const Orders = (props) => {
           <th scope="col">Địa chỉ email</th>
           <th scope="col">Tổng giá</th>
           <th scope="col">Ngày đặt hàng</th>
-          <th>Trạng thái</th>
+          <th>Hình thức thanh toán</th>
+          <th>Trạng thái thanh toán</th>
+          <th>Trạng thái vận chuyển</th>
+
           <th scope="col" className="text-end">
             Thao tác
           </th>
@@ -37,13 +40,24 @@ const Orders = (props) => {
                   {moment(order.createdAt).format("HH:mm:ss DD/MM/YYYY")}
                 </span>
               </td>
-
+              <td>
+                <span
+                  className={`badge btn-info`}
+                >{order?.orderDetails?.paymentMethod}</span>
+              </td>
               <td>
                 <span
                   className={`badge btn-${
-                    order?.orderDetails?.isDelivered ? "success" : "danger"
+                    order?.orderDetails?.isPaid ? "success" : "secondary"
                   }`}
-                >{`${order?.orderDetails?.isDelivered ? "Delivered" : "Not Delivered"}`}</span>
+                >{`${order?.orderDetails?.isPaid ? "Đã thanh toán" : "Chưa thanh toán"}`}</span>
+              </td>
+              <td>
+                <span
+                  className={`badge btn-${
+                    order?.orderDetails?.isDelivered ? "success" : "secondary"
+                  }`}
+                >{`${order?.orderDetails?.isDelivered ? "Đang vận chuyển" : "Chưa vận chuyển"}`}</span>
               </td>
               <td className="d-flex justify-content-end align-item-center">
                 <Link to={`/order/${order._id}`} className="text-success">
