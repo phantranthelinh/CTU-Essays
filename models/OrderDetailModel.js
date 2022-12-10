@@ -21,6 +21,10 @@ const orderDetailSchema = mongoose.Schema(
       required: true,
       default: 0.0,
     },
+    isCancelled: {
+      type: Boolean,
+      default: false,
+    },
     isPaid: {
       type: Boolean,
       default: false,

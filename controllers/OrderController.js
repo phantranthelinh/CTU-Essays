@@ -86,4 +86,16 @@ module.exports = {
       throw new Error("Không tìm thấy đơn đặt hàng");
     }
   }),
+  isCancelled: asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    const orderDetail = await OrderDetail.findById(order.orderDetails);
+    if(orderDetail){
+      orderDetail.isCancelled = true
+      await orderDetail.save()
+      res.status(200).json({message: "Hủy đơn hàng thành công"})
+    }else{
+      res.status(400).kson({message: "Không tìm thấy đơn hàng"})
+    }
+    
+  })
 };
