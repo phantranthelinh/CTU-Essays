@@ -24,6 +24,8 @@ const LatestOrder = (props) => {
                   <th scope="col">Đặt hàng vào lúc</th>
                   <th scope="col">Thanh toán</th>
                   <th scope="col">Vận chuyển</th>
+                  <th scope="col">Trạng thái</th>
+
                   <th scope="col">Thao tác</th>
 
 
@@ -63,6 +65,15 @@ const LatestOrder = (props) => {
                           }`}
                         >
                           {order.orderDetails?.isDelivered ? "Đang vận chuyển" : "Chưa vận chuyển"}
+                        </span>
+                      </td>
+                      <td>
+                        <span
+                          className={`badge rounded-pill btn-${
+                            order.orderDetails?.isCancelled ? "danger" : "success"
+                          }`}
+                        >
+                          {order.orderDetails?.isCancelled ? "Đơn hàng bị hủy" : "Thành công"}
                         </span>
                       </td>
 

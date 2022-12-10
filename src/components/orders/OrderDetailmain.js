@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   deliveredOrder,
-  getOrderDetails
+  getOrderDetails,
 } from "../../Redux/Actions/OrderActions";
 import Message from "./../LoadingError/Error";
 import Loading from "./../LoadingError/Loading";
@@ -24,6 +24,9 @@ const OrderDetailmain = (props) => {
   const deliveredHandler = () => {
     dispatch(deliveredOrder(order));
   };
+  const handleDeleteOrder = () =>{
+
+  }
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
@@ -43,21 +46,25 @@ const OrderDetailmain = (props) => {
       ) : (
         <>
           <div className="card">
-            <header className="card-header p-3 Header-green">
+            <header
+              className={`card-header p-3 Header-${
+                order?.orderDetails.isCancelled ? "red" : "green"
+              }`}
+            >
               <div className="row align-items-center ">
                 <div className="col-lg-6 col-md-6">
                   <span>
                     <i className="far fa-calendar-alt mx-2"></i>
                     <b className="text-white">
-                      Đặt hàng vào lúc {moment(order?.createdAt).format("HH:mm:ss DD/MM/YYYY")}
+                      Đặt hàng vào lúc{" "}
+                      {moment(order?.createdAt).format("HH:mm:ss DD/MM/YYYY")}
                     </b>
                   </span>
                   <br />
                   <small className="text-white mx-3 ">
-                    Mã đơn hàng: {`greenstore-${order?._id.substring(0,4)}`}
+                    Mã đơn hàng: {`greenstore-${order?._id.substring(0, 4)}`}
                   </small>
                 </div>
-            
               </div>
             </header>
             <div className="card-body">
@@ -66,7 +73,6 @@ const OrderDetailmain = (props) => {
                 user={order?.user}
                 paymentMethod={order?.orderDetails?.paymentMethod}
                 isPaid={order?.orderDetails?.isPaid}
-
                 shippingAddress={order?.orderDetails?.shippingAddress}
               />
 
@@ -86,7 +92,10 @@ const OrderDetailmain = (props) => {
                     {order.orderDetails?.isDelivered ? (
                       <button className="btn btn-secondary col-12">
                         Vận chuyển vào ({" "}
-                        {moment(order?.orderDetails.deliveredAt).format("DD/MM/YYYY")})
+                        {moment(order?.orderDetails.deliveredAt).format(
+                          "DD/MM/YYYY"
+                        )}
+                        )
                       </button>
                     ) : (
                       <>
@@ -94,11 +103,16 @@ const OrderDetailmain = (props) => {
                         <button
                           onClick={deliveredHandler}
                           className="btn btn-primary col-12"
-                        > 
+                        >
                           Đã vận chuyển
                         </button>
                       </>
                     )}
+                  </div>
+                  <div className="box shadow-sm bg-light  ">
+                    <button className="btn btn-primary col-12" onClick={handleDeleteOrder}>
+                      Xóa đơn hàng
+                    </button>
                   </div>
                 </div>
               </div>

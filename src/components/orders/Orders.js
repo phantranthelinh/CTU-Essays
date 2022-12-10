@@ -15,6 +15,7 @@ const Orders = (props) => {
           <th scope="col">Hình thức thanh toán</th>
           <th scope="col">Thanh toán</th>
           <th scope="col">Vận chuyển</th>
+          <th scope="col">Trạng thái</th>
 
           <th scope="col" className="text-end">
             Thao tác
@@ -66,6 +67,13 @@ const Orders = (props) => {
                     ? "Đang vận chuyển"
                     : "Chưa vận chuyển"
                 }`}</span>
+              </td>
+              <td>
+                <span className={`badge btn-${
+                    order?.orderDetails?.isCancelled ? "danger" : "success"
+                  }`}>
+                  {order?.orderDetails?.isCancelled ? "Đơn hàng bị hủy": "Thành công"}
+                </span>
               </td>
               <td className="d-flex justify-content-end align-item-center">
                 <Link to={`/order/${order._id}`} className="text-success">
