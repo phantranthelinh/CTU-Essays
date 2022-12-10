@@ -845,20 +845,35 @@
 											"top": 905,
 											"width": 225.83544921875,
 											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGE+c+vj+9dh5s=",
+											"_parent": {
+												"$ref": "AAAAAAGEHJ++EIDKcQ8="
+											},
+											"model": {
+												"$ref": "AAAAAAGE+c+vge9adag="
+											},
+											"font": "Arial;13;0",
+											"left": 693,
+											"top": 920,
+											"width": 225.83544921875,
+											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 688,
 									"top": 735,
 									"width": 235.83544921875,
-									"height": 188
+									"height": 203
 								}
 							],
 							"font": "Arial;13;0",
 							"left": 688,
 							"top": 712,
 							"width": 235.83544921875,
-							"height": 211,
+							"height": 226,
 							"nameLabel": {
 								"$ref": "AAAAAAGEHJ++EIDJTLo="
 							},
@@ -3023,6 +3038,15 @@
 							},
 							"name": "paymentMethod",
 							"type": "String"
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGE+c+vge9adag=",
+							"_parent": {
+								"$ref": "AAAAAAGEHJ++EIDGqP8="
+							},
+							"name": "isCancelled",
+							"type": "Boolean"
 						}
 					]
 				},
