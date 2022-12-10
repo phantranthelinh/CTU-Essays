@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "63929b52381120905fc182ad"
+  },
+  "userId": {
+    "$oid": "63916e43a2021c1de49bfef1"
+  },
+  "address": "can tho",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63929ca7ee29cbf9489ffa8b"
+  },
+  "userId": {
+    "$oid": "63916e43a2021c1de49bfef1"
+  },
+  "address": "hcm",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6392ee24decab58638ec3c5b"
+  },
+  "userId": {
+    "$oid": "6392e9aadecab58638ec3a33"
+  },
+  "address": "Toang",
+  "__v": 0
+}]

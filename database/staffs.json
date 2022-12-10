@@ -1,0 +1,106 @@
+[{
+  "_id": {
+    "$oid": "6390ab499f80de2f6979b336"
+  },
+  "name": "nhan vien 1",
+  "email": "nhanvien1@gmail.com",
+  "password": "$2b$10$1Pkd1ux/Sh8BqQ7vcxQL3usqChdi6nVjcWgKgwTQwaabSOQyMiTCW",
+  "staffType": {
+    "$oid": "639020ca3c6cce4fdc5410d7"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670425417057"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670425417057"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6390abc89f80de2f6979b367"
+  },
+  "name": "nhan vien 2e",
+  "email": "nhanvien2@gmail.com",
+  "password": "$2b$10$yAlwySJJrYgt0YnUQPvxXu9GN8n1jZODy80i5yThKib/JfZWNhbau",
+  "staffType": {
+    "$oid": "639020ca3c6cce4fdc5410d7"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670425544510"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670428787125"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6390ac269f80de2f6979b37b"
+  },
+  "name": "quan ly 1",
+  "email": "quanly1@gmail.com",
+  "password": "$2b$10$zusG67g9tmF5NsA2YUidjuLYaIoZc1oWGR791B7eFR3LMFcLPuBSK",
+  "staffType": {
+    "$oid": "639020f66d2c1d3a364f1f25"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670425638609"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670425638609"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6390ac4d9f80de2f6979b385"
+  },
+  "name": "quan ly 2",
+  "email": "quanly2@gmail.com",
+  "password": "$2b$10$kct/aXJ0L.xKTwtSku/nwOs/OcXf09J9UWSyfna/PhHCvslofpIlO",
+  "staffType": {
+    "$oid": "639020f66d2c1d3a364f1f25"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670425677638"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670428759092"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6390ac5f9f80de2f6979b38c"
+  },
+  "name": "quan tri vien",
+  "email": "quantrivien@gmail.com",
+  "password": "$2b$10$sdZdRI0r19zpK7Lz.p/xWeSWt.F3WgQWjnKZLB.9TFpMlKnaNyEk6",
+  "staffType": {
+    "$oid": "639016addac4a6014a3240a5"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670425695512"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670425695512"
+    }
+  },
+  "__v": 0
+}]

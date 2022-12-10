@@ -1,0 +1,166 @@
+[{
+  "_id": {
+    "$oid": "638c374e7a7c5655c9ae36c9"
+  },
+  "importId": {
+    "$oid": "638c374d7a7c5655c9ae36a3"
+  },
+  "importPrice": 1800000,
+  "countInStock": 19,
+  "name": "Sản phẩm 7",
+  "__v": 0,
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670473569027"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "638c374e7a7c5655c9ae36c7"
+  },
+  "importId": {
+    "$oid": "638c374d7a7c5655c9ae36a1"
+  },
+  "importPrice": 1000000,
+  "countInStock": 19,
+  "name": "Sản phẩm 9",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "638c374e7a7c5655c9ae36cd"
+  },
+  "importId": {
+    "$oid": "638c374d7a7c5655c9ae369d"
+  },
+  "importPrice": 1000000,
+  "countInStock": 19,
+  "name": "Sản phẩm 8",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "638c374e7a7c5655c9ae36cb"
+  },
+  "importId": {
+    "$oid": "638c374d7a7c5655c9ae369f"
+  },
+  "importPrice": 1000000,
+  "countInStock": 19,
+  "name": "Sản phẩm 6",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "638dfbc39834d84849049cfe"
+  },
+  "importId": {
+    "$oid": "638dfbc39834d84849049cfa"
+  },
+  "importPrice": 331333123,
+  "countInStock": 12,
+  "name": "P. QTTB1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639169049dab50bbf0db11f5"
+  },
+  "importId": {
+    "$oid": "639169049dab50bbf0db11f1"
+  },
+  "importPrice": 1800000,
+  "countInStock": 23,
+  "name": "Vans UA Classic Slip-On 98 DX Anaheim Factory Fast Times",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670473988642"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670473988642"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639169719dab50bbf0db120b"
+  },
+  "importId": {
+    "$oid": "639169719dab50bbf0db1207"
+  },
+  "importPrice": 2000000,
+  "countInStock": 3,
+  "name": "Converse Chuck Taylor All Star 70 Plus",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670474097684"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670474097684"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639169b69dab50bbf0db121b"
+  },
+  "importId": {
+    "$oid": "639169b69dab50bbf0db1217"
+  },
+  "importPrice": 1500000,
+  "countInStock": 2,
+  "name": "Converse Chuck Taylor All Star 1970s Recycled Rpet Canvas",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670474166592"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670474166592"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6392ae98e5fe1ceca1f1e4bd"
+  },
+  "importId": {
+    "$oid": "6392ae98e5fe1ceca1f1e4b9"
+  },
+  "importPrice": 123230,
+  "countInStock": 123,
+  "name": "12321321",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670557336546"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670557336546"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6392babdc97d241b4abe82c6"
+  },
+  "importId": {
+    "$oid": "6392babdc97d241b4abe82c2"
+  },
+  "importPrice": 213213033,
+  "countInStock": 32,
+  "name": "Vans UA SK8-Hi I Heart ",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670560445434"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670560745118"
+    }
+  },
+  "__v": 0
+}]

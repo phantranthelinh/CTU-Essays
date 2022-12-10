@@ -1,0 +1,199 @@
+[{
+  "_id": {
+    "$oid": "638c374e7a7c5655c9ae36c3"
+  },
+  "name": "Supra Breaker ",
+  "description": "Thiết kế cổ cao hiện đại được cải tiến nâng cấp tối ưu về mặt kiểu dáng. Thân giày được làm từ da lộn và da Pu mềm mại giúp cho đôi chân luôn được thoải mái. Nội thất bên trong là bộ đệm SUPRAFOAM êm nhẹ độc quyền, iconic hình vương miệng mang ý nghĩa biểu tượng được phố trí ở lưỡi gà, dây đai, phía sau thân giày tạo điểm nhấn nổi bật cho dòng sản phẩm.",
+  "rating": 0,
+  "numReviews": 0,
+  "salePrice": 1400000,
+  "importProductDetail": {
+    "$oid": "638c374e7a7c5655c9ae36bb"
+  },
+  "importId": {
+    "$oid": "638c374c7a7c5655c9ae3697"
+  },
+  "image": {
+    "$oid": "638c374d7a7c5655c9ae36a9"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670133582718"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670473874937"
+    }
+  },
+  "slug": "supra-breaker",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "638c374f7a7c5655c9ae36d1"
+  },
+  "name": "Vans UA Authentic 44 DX Our Legends Mongoose",
+  "description": "Vans x Our Legends (Mongoose) được xây dựng dựa trên hình bóng của dòng Authentic 44 DX hứa hẹn sẽ gây bùng nổ cho cộng đồng đam mê BMX và Skate. Với chất liệu chính là 100% Textile kết hợp cùng đệm lót OrthoLite hiện đại sẽ mang tới những phút giây trải nghiệm tuyệt vời nhất. Đặc biệt với những phối màu rực rỡ tượng trưng cho từng cột mốc lịch sử của Mongoose, được thể hiện trong bộ sưu tập lần này sẽ khiến người mang thêm phần thích thú.",
+  "rating": 3,
+  "numReviews": 1,
+  "salePrice": 1400000,
+  "importProductDetail": {
+    "$oid": "638c374e7a7c5655c9ae36c9"
+  },
+  "importId": {
+    "$oid": "638c374d7a7c5655c9ae36a3"
+  },
+  "image": {
+    "$oid": "638c374d7a7c5655c9ae36b3"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670133583039"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670573584373"
+    }
+  },
+  "slug": "vans-ua-authentic-44-dx-our-legends-mongoose",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "638c374f7a7c5655c9ae36d3"
+  },
+  "name": "Vans UA Old Skool Varsity Canvased",
+  "description": "Vans Varsity Canvas đã mang tới một sắc màu mới mẻ hiện đại, cùng với lối thiết kế đậm chất cổ điển. Với chất liệu chính là 56.2% da và 43.8% vải đã đem tới sự khác biệt lớn cho dòng Old Skool. Phối màu Varsity Canvas Blue/ Green sẽ giúp bạn chinh phục mọi outfit khác nhau. Bên cạnh đó, bộ đệm lót OrthoLite êm ái cũng hỗ trợ trong quá trình chuyển động tốt hơn. Giúp bạn có một trải nghiệm đáng nhớ hơn với đôi giày thể thao đường phố này",
+  "rating": 4,
+  "numReviews": 3,
+  "salePrice": 1400000,
+  "importProductDetail": {
+    "$oid": "638c374e7a7c5655c9ae36bd"
+  },
+  "importId": {
+    "$oid": "638c374d7a7c5655c9ae369b"
+  },
+  "image": {
+    "$oid": "638c374d7a7c5655c9ae36ab"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670133583042"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670592162349"
+    }
+  },
+  "slug": "vans-ua-old-skool-varsity-canvased",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639169049dab50bbf0db11f7"
+  },
+  "name": "Vans UA Classic Slip-On 98 DX Anaheim Factory Fast Times",
+  "description": "Có thể nói bộ phim Fast Times at Ridgemont High chính là một trong những nguyên nhân đưa tên tuổi Vans Slip On Checkerboard đến gần hơn với tất cả mọi người. Sản phẩm Vans Slip-On x Fast Times dựa trên những đặc điểm của dòng Anaheim Factory với điểm nhấn tên bộ phim dọc theo phần đế giày giúp các tín đồ Vans \"hãnh diện\" hơn khi diện trên người một item mang theo văn hóa của miền Nam Cali",
+  "rating": 0,
+  "numReviews": 1,
+  "salePrice": 2700000,
+  "importProductDetail": {
+    "$oid": "639169049dab50bbf0db11f5"
+  },
+  "image": {
+    "$oid": "639169049dab50bbf0db11f3"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670473988699"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670552067050"
+    }
+  },
+  "slug": "vans-ua-classic-slip-on-98-dx-anaheim-factory-fast-times",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639169719dab50bbf0db120d"
+  },
+  "name": "Converse Chuck Taylor All Star 70 Plus",
+  "description": "Lấy cảm hứng từ dòng Chuck 70s, Chuck 70s Plus là một thiết kế “lệch pha\" với sự kết hợp của hai loại vải 12oz và 16oz tái chế. Về tổng thể, đây là một kết cấu mới dựa trên sự tách rời - chắp vá - tái tạo đầy ấn tượng phá vỡ mọi quy tắc nhưng vẫn giữ được nét cổ điển của dòng giày kinh điển này.",
+  "rating": 4,
+  "numReviews": 1,
+  "salePrice": 2500000,
+  "importProductDetail": {
+    "$oid": "639169719dab50bbf0db120b"
+  },
+  "image": {
+    "$oid": "639169719dab50bbf0db1209"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670474097744"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670557130891"
+    }
+  },
+  "slug": "converse-chuck-taylor-all-star-70-plus",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639169b69dab50bbf0db121d"
+  },
+  "name": "Converse Chuck Taylor All Star 1970s Recycled Rpet Canvas",
+  "description": "Converse Chuck 70 Recycled RPET Canvas được “tái sinh” với chất liệu tái chế bảo vệ môi trường tối đa. Bên cạnh đó, phối màu hiện đại sẽ giúp bạn có thêm nguồn năng lượng tích cực cho mọi outfit của mình. Với những ai trót mê Converse thì đây sẽ là “must have item” mà bạn không nên bỏ lỡ.",
+  "rating": 5,
+  "numReviews": 1,
+  "salePrice": 2000000,
+  "importProductDetail": {
+    "$oid": "639169b69dab50bbf0db121b"
+  },
+  "image": {
+    "$oid": "639169b69dab50bbf0db1219"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670474166645"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670551252783"
+    }
+  },
+  "slug": "converse-chuck-taylor-all-star-1970s-recycled-rpet-canvas",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6392babdc97d241b4abe82c8"
+  },
+  "name": "Vans UA SK8-Hi I Heart ",
+  "description": "Vans SK8-HI I Heart phiên bản cổ cao với điểm nhấn nổi bật họa tiết chữ \"I [Heart] Girls I [Heart] Boys\" bố trí bên hông thân giày. Đồng thời mặt còn lại cũng được chấm phá họa tiết những ô vuông bàn cờ đỏ đen đầy ấn tượng",
+  "rating": 3.5,
+  "numReviews": 2,
+  "salePrice": 2131230,
+  "importProductDetail": {
+    "$oid": "6392babdc97d241b4abe82c6"
+  },
+  "image": {
+    "$oid": "6392babdc97d241b4abe82c4"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670560445489"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670572478682"
+    }
+  },
+  "slug": "vans-ua-sk8-hi-i-heart",
+  "__v": 0
+}]

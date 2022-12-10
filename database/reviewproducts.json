@@ -1,0 +1,185 @@
+[{
+  "_id": {
+    "$oid": "639163fedfa4784a414000a5"
+  },
+  "productId": {
+    "$oid": "638c374f7a7c5655c9ae36d3"
+  },
+  "userId": {
+    "$oid": "6253ea6bcda31bdae640dfe6"
+  },
+  "comment": "good",
+  "rating": 4,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670472702426"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670472702426"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63916405dfa4784a414000b7"
+  },
+  "productId": {
+    "$oid": "638c374f7a7c5655c9ae36d3"
+  },
+  "userId": {
+    "$oid": "6253ea6bcda31bdae640dfe6"
+  },
+  "comment": "asd",
+  "rating": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670472709450"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670472709450"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639296d4e25647df095a95b7"
+  },
+  "productId": {
+    "$oid": "639169b69dab50bbf0db121d"
+  },
+  "userId": {
+    "$oid": "63916e43a2021c1de49bfef1"
+  },
+  "comment": "good",
+  "rating": 5,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670551252676"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670551252676"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63929a02381120905fc1828b"
+  },
+  "productId": {
+    "$oid": "639169049dab50bbf0db11f7"
+  },
+  "userId": {
+    "$oid": "63916e43a2021c1de49bfef1"
+  },
+  "comment": "",
+  "rating": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670552066935"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670552066935"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6392adca3f6b7bf43ed8c4e3"
+  },
+  "productId": {
+    "$oid": "639169719dab50bbf0db120d"
+  },
+  "userId": {
+    "$oid": "63916e43a2021c1de49bfef1"
+  },
+  "comment": "33",
+  "rating": 4,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670557130781"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670557130781"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6392b587615ab067f7a044b4"
+  },
+  "productId": {
+    "$oid": "638c374f7a7c5655c9ae36cf"
+  },
+  "userId": {
+    "$oid": "63916e43a2021c1de49bfef1"
+  },
+  "comment": "",
+  "rating": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670559111583"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670559111583"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6392d85a114efdf5754b0f57"
+  },
+  "productId": {
+    "$oid": "6392babdc97d241b4abe82c8"
+  },
+  "userId": {
+    "$oid": "63916e43a2021c1de49bfef1"
+  },
+  "comment": "hello",
+  "rating": 2,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670568026428"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670568026428"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "639336a28abe2191c005eae6"
+  },
+  "productId": {
+    "$oid": "638c374f7a7c5655c9ae36d3"
+  },
+  "userId": {
+    "$oid": "63933627a68ed63159686bc5"
+  },
+  "comment": "tam tam",
+  "rating": 3,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1670592162025"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1670592162025"
+    }
+  },
+  "__v": 0
+}]
