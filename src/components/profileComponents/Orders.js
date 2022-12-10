@@ -33,6 +33,7 @@ const Orders = (props) => {
                     <th>Mã đơn hàng</th>
                     <th>Ngày đặt hàng</th>
                     <th>Trạng thái</th>
+                    <th>Tình trạng vận chuyển</th>
                     <th>Thanh toán</th>
                     <th>Tổng tiền</th>
                   </tr>
@@ -40,13 +41,27 @@ const Orders = (props) => {
                 <tbody>
                   {orders?.map((order, index) => {
                     return (
-                      <tr key={index}>
+                      <tr key={index} className={`${order?.orderDetails?.isCancelled ? "alert-danger" : "alert-success"}`}>
                         <td>
                           <a href={`/order/${order._id}`} className="link">
                             {order?.user?.name.substr(-4) +
                               "-" +
                               order._id.substr(-7)}
                           </a>
+                        </td>
+                        <td>
+                          {order.isPaid
+                            ? moment(order?.orderDetails?.paidAt).format(
+                                "HH:mm:ss DD/MM/YYYY"
+                              )
+                            : moment(order?.orderDetails?.createdAt).format(
+                                "HH:mm:ss DD/MM/YYYY"
+                              )}
+                        </td>
+                        <td>
+                          {order?.orderDetails?.isCancelled
+                            ? "Đã hủy"
+                            : "Thành công"}
                         </td>
                         <td>
                           {order?.orderDetails.isDelivered
@@ -58,15 +73,7 @@ const Orders = (props) => {
                             ? "Đã thanh toán"
                             : "Chưa thanh toán"}
                         </td>
-                        <td>
-                          {order.isPaid
-                            ? moment(order?.orderDetails?.paidAt).format(
-                                "HH:mm:ss DD/MM/YYYY"
-                              )
-                            : moment(order?.orderDetails?.createdAt).format(
-                                "HH:mm:ss DD/MM/YYYY"
-                              )}
-                        </td>
+                       
                         <td style={{ color: "red" }}>
                           {Intl.NumberFormat("VN", {
                             maximumSignificantDigits: 3,

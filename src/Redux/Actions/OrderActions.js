@@ -1,22 +1,17 @@
 //CREATE ORDER
 
+import axios from "axios";
 import {
-  ORDER_CREATE_REQUEST,
+  ORDER_CANCEL_FAIL, ORDER_CANCEL_REQUEST, ORDER_CANCEL_SUCCESS, ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
   ORDER_DETAILS_FAIL,
   ORDER_DETAILS_REQUEST,
-  ORDER_DETAILS_SUCCESS,
-  ORDER_PAY_FAIL,
-  ORDER_PAY_REQUEST,
-  ORDER_PAY_SUCCESS,
-  ORDER_LIST_MY_REQUEST,ORDER_LIST_MY_FAIL
+  ORDER_DETAILS_SUCCESS, ORDER_LIST_MY_FAIL, ORDER_LIST_MY_REQUEST
 } from "../Constants/OrderConstants";
-import axios from "axios";
+import { URL } from "../Url";
 import { CART_CLEAR_ITEMS } from "./../Constants/CartConstants";
+import { ORDER_CREATE_FAIL, ORDER_LIST_MY_SUCCESS } from "./../Constants/OrderConstants";
 import { logout } from "./UserActions";
-import { ORDER_CREATE_FAIL } from "./../Constants/OrderConstants";
-import { ORDER_LIST_MY_SUCCESS } from './../Constants/OrderConstants';
-import {URL} from "../Url"
 // CREATE ORDER
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -87,11 +82,11 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   }
 };
 
-// ORDER PAY
-export const payOrder =
-  (orderId, paymentResult) => async (dispatch, getState) => {
+// CANCEL ORDER
+export const cancelOrder =
+  (orderId,) => async (dispatch, getState) => {
     try {
-      dispatch({ type: ORDER_PAY_REQUEST });
+      dispatch({ type: ORDER_CANCEL_REQUEST });
 
       const {
         userLogin: { userInfo },
@@ -104,11 +99,10 @@ export const payOrder =
         },
       };
       const { data } = await axios.put(
-        `${URL}/api/orders/${orderId}/pay`,
-        paymentResult,
+        `${URL}/api/orders/cancelled/${orderId}`,
         config
       );
-      await dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
+      await dispatch({ type: ORDER_CANCEL_SUCCESS, payload: data });
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -118,7 +112,7 @@ export const payOrder =
         dispatch(logout());
       }
       dispatch({
-        type: ORDER_PAY_FAIL,
+        type: ORDER_CANCEL_FAIL,
         payload: message,
       });
     }

@@ -4,7 +4,9 @@ import moment from "moment";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getOrderDetails, payOrder } from "../Redux/Actions/OrderActions";
+import { toast } from "react-toastify";
+import Toast from "../components/LoadingError/Toast";
+import { cancelOrder, getOrderDetails } from "../Redux/Actions/OrderActions";
 import Header from "./../components/Header";
 import Message from "./../components/LoadingError/Error";
 import Loading from "./../components/LoadingError/Loading";
@@ -19,8 +21,8 @@ const OrderScreen = (props) => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  const orderPay = useSelector((state) => state.orderPay);
-  const { success: successPay, loading: loadingPay } = orderPay;
+  const orderCancel = useSelector((state) => state.orderCancel);
+  const { success: successCancel, loading: loadingCancel } = orderCancel;
 
   if (!loading) {
     const addDecimals = (num) => {
@@ -35,24 +37,29 @@ const OrderScreen = (props) => {
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId, successPay]);
+    if(successCancel){
+      toast.success("Hủy đơn hàng thành công")
+    }
+  }, [dispatch, orderId, successCancel]);
 
-  const orderPayHandler = () => {
-    const paymentResult = {
-      id: orderId,
-      status: true,
-      email_address: order.user.email,
-      update_time: Date.now(),
-    };
-
-    dispatch(payOrder(orderId, paymentResult));
+  const HandleCancelOrder = () => {
+    dispatch(cancelOrder(orderId));
+    
   };
   return (
     <>
+    <Toast/>
       <Header />
 
       <div className="container">
-        <h2 className="text-center mt-4">Thông tin đơn hàng</h2>
+        <h2 className="text-center mt-4">
+          Thông tin đơn hàng -{" "}
+          {order?.orderDetails?.isCancelled ? (
+            <span className="text-danger text-center">
+              Đơn hàng đã đươc hủy
+            </span>
+          ) : null}
+        </h2>
 
         {loading ? (
           <Loading />
@@ -94,7 +101,9 @@ const OrderScreen = (props) => {
                     <h5>
                       <strong>Thông tin đặt hàng</strong>
                     </h5>
-                    <p>Hình thức thanh toán: {order?.orderDetails?.paymentMethod}</p>
+                    <p>
+                      Hình thức thanh toán: {order?.orderDetails?.paymentMethod}
+                    </p>
                     {order?.orderDetails?.isPaid ? (
                       <div className="bg-success p-2 col-12">
                         <p className="text-white text-center text-sm-start">
@@ -222,14 +231,13 @@ const OrderScreen = (props) => {
                     </tr>
                   </tbody>
                 </table>
-                {/* <div className="col-12">
-                  {loadingPay && <Loading />}
-                  {order?.isPaid ? (
+                <div className="col-12">
+                  {order?.orderDetails?.isCancelled ? (
                     <></>
                   ) : (
-                    <button onClick={orderPayHandler}>Hoàn tất đặt hàng</button>
+                    <button onClick={HandleCancelOrder}>Hủy đơn hàng</button>
                   )}
-                </div> */}
+                </div>
               </div>
             </div>
           </>
